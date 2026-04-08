@@ -697,6 +697,123 @@
   .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
+  /* WHY DIFFERENT */
+  .different { padding: 120px 0; }
+  .diff-grid {
+    display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0;
+    align-items: start; margin-top: 64px;
+  }
+  .diff-col { display: flex; flex-direction: column; gap: 12px; }
+  .diff-col-label {
+    font-family: var(--font-display); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px; color: var(--text3);
+    margin-bottom: 8px;
+  }
+  .ethereal-label { color: var(--accent2) !important; }
+  .diff-item {
+    padding: 14px 18px; border-radius: var(--radius);
+    font-size: 14px; font-weight: 300; line-height: 1.5;
+    display: flex; align-items: center; gap: 10px;
+    backdrop-filter: blur(12px);
+  }
+  .diff-item::before { font-size: 14px; flex-shrink: 0; }
+  .diff-item.bad {
+    background: rgba(239,68,68,0.05);
+    border: 1px solid rgba(239,68,68,0.12);
+    color: var(--text2);
+  }
+  .diff-item.bad::before { content: '✕'; color: rgba(239,68,68,0.5); }
+  .diff-item.good {
+    background: rgba(124,109,250,0.07);
+    border: 1px solid var(--border3);
+    color: var(--text);
+  }
+  .diff-item.good::before { content: '✓'; color: var(--green); font-weight: 700; }
+  .diff-divider {
+    display: flex; align-items: center; justify-content: center;
+    padding-top: 44px;
+  }
+  .diff-logo {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: white;
+    box-shadow: 0 0 30px var(--glow);
+  }
+
+  /* ONBOARDING SECTION */
+  .onboarding { padding: 120px 0; background: linear-gradient(180deg, transparent, var(--bg2) 20%, var(--bg2) 80%, transparent); }
+  .onboarding-flow {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    align-items: start; margin-top: 64px;
+  }
+  .onboard-steps { display: flex; flex-direction: column; }
+  .onboard-step {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .onboard-num {
+    font-family: var(--font-display); font-size: 11px; font-weight: 700;
+    color: var(--accent2); letter-spacing: 2px;
+    width: 28px; flex-shrink: 0; padding-top: 16px;
+  }
+  .onboard-content {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 20px;
+    flex: 1;
+    box-shadow: var(--panel-shadow);
+    position: relative;
+  }
+  .onboard-content::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  }
+  .onboard-q {
+    font-family: var(--font-display); font-size: 15px; font-weight: 600;
+    color: var(--text); margin-bottom: 6px; letter-spacing: -0.2px;
+  }
+  .onboard-hint { font-size: 13px; color: var(--text3); font-weight: 300; }
+  .onboard-connector {
+    width: 1px; height: 20px;
+    background: linear-gradient(to bottom, var(--border2), transparent);
+    margin: 4px 0 4px 13px;
+  }
+  .onboard-output {
+    background: rgba(124,109,250,0.07);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border3);
+    border-radius: var(--radius2); padding: 32px;
+    box-shadow: var(--panel-shadow), 0 0 60px var(--glow2);
+    position: relative; overflow: hidden;
+  }
+  .onboard-output::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(167,139,250,0.4), transparent);
+  }
+  .onboard-response-label {
+    font-family: var(--font-display); font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px; color: var(--accent2);
+    margin-bottom: 16px;
+  }
+  .onboard-response { }
+  .response-line {
+    font-family: var(--font-display); font-size: 22px; font-weight: 700;
+    color: var(--text); margin-bottom: 20px; letter-spacing: -0.5px;
+  }
+  .response-body { display: flex; flex-direction: column; gap: 12px; }
+  .response-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 14px; color: var(--text2); line-height: 1.7; font-weight: 300;
+  }
+  .response-item strong { color: var(--text); font-weight: 600; }
+  .response-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent2); flex-shrink: 0; margin-top: 7px;
+    box-shadow: 0 0 8px var(--accent);
+  }
+
   /* MOBILE */
   @media (max-width: 900px) {
     .nav-links { display: none; }
@@ -721,6 +838,9 @@
     .footer-top { grid-template-columns: 1fr 1fr; }
     .hero { padding: 120px 0 80px; }
     .screen-content { grid-template-columns: 1fr; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .diff-divider { display: none; }
+    .onboarding-flow { grid-template-columns: 1fr; }
   }
   @media (max-width: 600px) {
     .process-grid { grid-template-columns: 1fr; }
@@ -767,18 +887,18 @@
     <div class="hero-inner">
       <div class="hero-badge">
         <div class="badge-dot"></div>
-        Now live — built for short-form creators
+        Not just another AI tool — a personal content strategist
       </div>
       <h1>
-        <span class="line1">Create Better Content.</span>
-        <span class="line2">In Less Time.</span>
+        <span class="line1">Stop guessing what to post.</span>
+        <span class="line2">Start creating content that hits.</span>
       </h1>
-      <p class="hero-sub">Ethereal helps creators turn rough ideas into high-performing short-form content — with scripts, clips, and strategy ready in minutes.</p>
+      <p class="hero-sub">Ethereal understands your style, your audience, and what actually performs — then helps you create content that connects and grows.</p>
       <div class="hero-actions">
-        <a href="https://app.etherealaistudio.com" class="btn-primary btn-lg">Start Creating Free</a>
-        <a href="#features" class="btn-outline">See how it works</a>
+        <a href="https://app.etherealaistudio.com" class="btn-primary btn-lg">Find out what works for you →</a>
+        <a href="#different" class="btn-outline">See how it's different</a>
       </div>
-      <p class="hero-note">No credit card required · Free forever plan available</p>
+      <p class="hero-note">No credit card required · Free 7-day trial</p>
 
       <div class="hero-visual">
         <div class="hero-screen">
@@ -832,7 +952,96 @@
   </div>
 </section>
 
-<!-- FEATURES -->
+<!-- WHY DIFFERENT -->
+<section class="different" id="different">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="section-label">Why Ethereal</div>
+      <h2 class="section-title">Most AI tools generate content.<br>Ethereal builds creators.</h2>
+      <p class="section-sub">There's a difference between a tool that outputs content and one that actually understands you.</p>
+    </div>
+    <div class="diff-grid reveal">
+      <div class="diff-col diff-col-other">
+        <div class="diff-col-label">Other AI Tools</div>
+        <div class="diff-item bad">Generic ideas — not built for your niche</div>
+        <div class="diff-item bad">No memory — starts from scratch every time</div>
+        <div class="diff-item bad">Just outputs — never improves you</div>
+        <div class="diff-item bad">Same for everyone — no personalisation</div>
+        <div class="diff-item bad">Tells you what to post — not why it works</div>
+      </div>
+      <div class="diff-divider">
+        <div class="diff-logo">✦</div>
+      </div>
+      <div class="diff-col diff-col-ethereal">
+        <div class="diff-col-label ethereal-label">Ethereal</div>
+        <div class="diff-item good">Personalised to your voice, niche &amp; audience</div>
+        <div class="diff-item good">Learns what works for you over time</div>
+        <div class="diff-item good">Challenges and improves your creative instincts</div>
+        <div class="diff-item good">Built around your identity as a creator</div>
+        <div class="diff-item good">Teaches you to think like a strategist</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONBOARDING MOMENT -->
+<section class="onboarding" id="onboarding">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="section-label">First 2 Minutes</div>
+      <h2 class="section-title">This is what happens<br>when you first open Ethereal.</h2>
+      <p class="section-sub">Before Ethereal creates anything, it gets to know you. This is your wow moment.</p>
+    </div>
+    <div class="onboarding-flow reveal">
+      <div class="onboard-steps">
+        <div class="onboard-step">
+          <div class="onboard-num">01</div>
+          <div class="onboard-content">
+            <div class="onboard-q">"What are you building — and who is it for?"</div>
+            <div class="onboard-hint">Ethereal maps your niche, audience, and platform</div>
+          </div>
+        </div>
+        <div class="onboard-connector"></div>
+        <div class="onboard-step">
+          <div class="onboard-num">02</div>
+          <div class="onboard-content">
+            <div class="onboard-q">"What should people feel in the first 3 seconds?"</div>
+            <div class="onboard-hint">It learns your hook style and emotional tone</div>
+          </div>
+        </div>
+        <div class="onboard-connector"></div>
+        <div class="onboard-step">
+          <div class="onboard-num">03</div>
+          <div class="onboard-content">
+            <div class="onboard-q">"What's actually worked for you before?"</div>
+            <div class="onboard-hint">It finds your pattern and builds on your strengths</div>
+          </div>
+        </div>
+      </div>
+      <div class="onboard-output">
+        <div class="onboard-response-label">Ethereal responds:</div>
+        <div class="onboard-response">
+          <div class="response-line">"Alright… I see you. 👀"</div>
+          <div class="response-body">
+            <div class="response-item">
+              <span class="response-dot"></span>
+              "You're building a creator brand focused on <strong>personal finance for 20-somethings</strong> — practical, no fluff, slightly edge."
+            </div>
+            <div class="response-item">
+              <span class="response-dot"></span>
+              "Your strongest angle is <strong>emotional connection through real numbers</strong> — your audience wants proof, not theory."
+            </div>
+            <div class="response-item">
+              <span class="response-dot"></span>
+              "You're currently playing slightly safe with your hooks. <strong>Let's fix that.</strong>"
+            </div>
+          </div>
+        </div>
+        <a href="https://app.etherealaistudio.com" class="btn-primary" style="margin-top:24px;display:inline-block;">Build your creator profile →</a>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="features" id="features">
   <div class="container">
     <div class="section-head reveal">
@@ -1096,13 +1305,14 @@
 <section class="testimonials" id="testimonials">
   <div class="container">
     <div class="section-head center reveal">
-      <div class="section-label">Testimonials</div>
+      <div class="section-label">Social Proof</div>
       <h2 class="section-title">Creators love Ethereal.</h2>
+      <p class="section-sub">Real words from real creators — not polished marketing copy.</p>
     </div>
     <div class="testi-grid">
       <div class="testi-card reveal">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"I used to spend 3 hours writing scripts. Now it takes me 10 minutes and they actually perform better. Game changer."</p>
+        <p class="testi-quote">"This called out my exact problem better than I could explain it myself. I didn't realise how safe I was playing until Ethereal told me."</p>
         <div class="testi-author">
           <div class="testi-avatar">MR</div>
           <div>
@@ -1113,7 +1323,7 @@
       </div>
       <div class="testi-card reveal" style="transition-delay:0.1s">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Ethereal helped me go from posting once a week to every single day. My views tripled in 30 days. I'm not going back."</p>
+        <p class="testi-quote">"It feels like having a real strategist, not an AI tool. The difference is it actually pushes back on weak ideas instead of just validating everything."</p>
         <div class="testi-author">
           <div class="testi-avatar">JK</div>
           <div>
@@ -1124,7 +1334,7 @@
       </div>
       <div class="testi-card reveal" style="transition-delay:0.2s">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"The Pick the Winner feature alone is worth the Pro plan. I stopped guessing and started growing. Simple as that."</p>
+        <p class="testi-quote">"I've tried every AI content tool. Ethereal is the first one that actually learns me — not just my niche, but how I think and what makes my content work."</p>
         <div class="testi-author">
           <div class="testi-avatar">PS</div>
           <div>
@@ -1195,10 +1405,10 @@
 <section class="cta-banner">
   <div class="container">
     <div class="cta-inner reveal">
-      <h2>Your content era starts today.</h2>
-      <p>Join thousands of creators already using Ethereal to post more, stress less, and grow faster.</p>
+      <h2>You don't need more ideas.<br>You need the right ones.</h2>
+      <p>Let Ethereal show you what actually works for you — your voice, your audience, your growth.</p>
       <div class="cta-actions">
-        <a href="https://app.etherealaistudio.com" class="btn-primary btn-lg">Start Creating Free</a>
+        <a href="https://app.etherealaistudio.com" class="btn-primary btn-lg">Start with your strategist →</a>
         <a href="#pricing" class="btn-outline">View Pricing</a>
       </div>
     </div>
