@@ -3,897 +3,1512 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ethereal AI Studios</title>
+<title>Ethereal AI Studios — Content Creation for Creators</title>
+<meta name="description" content="Turn ideas into viral short-form content in minutes. AI-powered scripts, clips, and strategy built for creators.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#04050e;
-  --bg2:#080d1e;
-  --bg3:#0d1228;
-  --s1:rgba(255,255,255,0.028);
-  --s2:rgba(255,255,255,0.05);
-  --s3:rgba(255,255,255,0.085);
-  --b1:rgba(255,255,255,0.07);
-  --b2:rgba(255,255,255,0.13);
-  --ba:rgba(120,90,255,0.4);
-  --ba2:rgba(120,90,255,0.2);
-  --t1:#ede9ff;
-  --t2:rgba(237,233,255,0.6);
-  --t3:rgba(237,233,255,0.32);
-  --t4:rgba(237,233,255,0.16);
-  --ac:#7c5fff;
-  --ac2:#a389ff;
-  --ac3:#c4b0ff;
-  --acg:rgba(124,95,255,0.14);
-  --acg2:rgba(124,95,255,0.07);
-  --teal:#1dd1b4;
-  --amber:#f5a623;
-  --green:#3dd68c;
-  --red:#f87171;
-  --fd:'Bricolage Grotesque',sans-serif;
-  --fb:'DM Sans',sans-serif;
-  --sidebar:248px;
-}
-html,body{height:100%;overflow:hidden}
-body{background:var(--bg);color:var(--t1);font-family:var(--fb);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+  :root {
+    --bg: #07070f;
+    --bg2: #0b0b18;
+    --bg3: #0f0f1e;
+    --surface: rgba(255,255,255,0.04);
+    --surface2: rgba(255,255,255,0.07);
+    --surface3: rgba(255,255,255,0.10);
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --border3: rgba(167,139,250,0.28);
+    --text: #eeeeff;
+    --text2: #8888aa;
+    --text3: #50506a;
+    --accent: #7c6dfa;
+    --accent2: #a78bfa;
+    --accent3: #c4b5fd;
+    --glow: rgba(124,109,250,0.18);
+    --glow2: rgba(124,109,250,0.09);
+    --glow3: rgba(124,109,250,0.04);
+    --gold: #e8b84b;
+    --green: #2dd4a0;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --radius: 18px;
+    --radius2: 26px;
+    --panel-shadow: 0 4px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07);
+  }
 
-/* ── ANIMATED BG ── */
-.bg-canvas{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.orb{position:absolute;border-radius:50%;filter:blur(90px)}
-.orb1{width:700px;height:600px;background:radial-gradient(ellipse,rgba(100,70,255,0.1) 0%,transparent 65%);top:-150px;left:180px;animation:orb1move 18s ease-in-out infinite alternate}
-.orb2{width:500px;height:450px;background:radial-gradient(ellipse,rgba(29,209,180,0.06) 0%,transparent 65%);bottom:-80px;right:80px;animation:orb2move 22s ease-in-out infinite alternate}
-.orb3{width:350px;height:350px;background:radial-gradient(ellipse,rgba(124,95,255,0.07) 0%,transparent 65%);top:45%;right:35%;animation:orb3move 15s ease-in-out infinite alternate}
-@keyframes orb1move{0%{transform:translate(0,0) scale(1)}100%{transform:translate(60px,40px) scale(1.12)}}
-@keyframes orb2move{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-40px,-30px) scale(1.08)}}
-@keyframes orb3move{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,-50px) scale(0.9)}}
-.noise{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0.35;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── APP SHELL ── */
-.app{display:flex;height:100vh;position:relative;z-index:2}
+  html { scroll-behavior: smooth; }
 
-/* ── SIDEBAR ── */
-.sidebar{width:var(--sidebar);flex-shrink:0;background:rgba(4,5,14,0.82);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-right:1px solid var(--b1);display:flex;flex-direction:column;height:100vh;position:relative;z-index:10}
-.sidebar::after{content:'';position:absolute;top:0;right:-1px;width:1px;height:100%;background:linear-gradient(to bottom,transparent,rgba(124,95,255,0.25) 30%,rgba(124,95,255,0.15) 70%,transparent)}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
 
-.sidebar-logo{padding:22px 20px 20px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:11px;cursor:pointer}
-.logo-gem{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#8c6fff,#4d2fd4);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;box-shadow:0 0 0 1px rgba(140,111,255,0.3),0 4px 20px rgba(124,95,255,0.4)}
-.logo-gem::after{content:'';position:absolute;inset:0;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.18) 0%,transparent 60%)}
-.logo-gem-inner{font-size:15px;position:relative;z-index:1}
-.logo-wordmark{font-family:var(--fd);font-size:15px;font-weight:800;color:var(--t1);letter-spacing:-0.025em;line-height:1}
-.logo-wordmark span{color:var(--ac2)}
-.logo-tagline{font-size:10px;color:var(--t3);letter-spacing:0.05em;margin-top:2px;font-weight:400}
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
 
-.sidebar-nav{flex:1;padding:14px 12px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
-.nav-group-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--t4);padding:14px 10px 5px;font-family:var(--fd)}
-.nav-item{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;cursor:pointer;transition:background 0.2s,color 0.2s,border-color 0.2s;color:var(--t2);font-size:13.5px;font-weight:500;border:1px solid transparent;text-decoration:none;position:relative;overflow:hidden}
-.nav-item::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:2px;height:0;background:var(--ac2);border-radius:1px;transition:height 0.25s}
-.nav-item:hover{background:var(--s2);color:var(--t1)}
-.nav-item.active{background:var(--acg);border-color:var(--ba2);color:var(--t1)}
-.nav-item.active::before{height:60%}
-.nav-item.active .nav-icon{filter:drop-shadow(0 0 6px var(--ac))}
-.nav-icon{font-size:15px;width:20px;text-align:center;flex-shrink:0;transition:filter 0.2s}
-.nav-badge{margin-left:auto;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;background:rgba(124,95,255,0.18);color:var(--ac2);font-family:var(--fd);letter-spacing:0.05em;border:1px solid rgba(124,95,255,0.25)}
+  /* AMBIENT GLOW */
+  .ambient {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ambient-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(124,109,250,0.12) 0%, transparent 70%);
+    top: -200px; left: -100px;
+    animation: drift1 20s ease-in-out infinite;
+  }
+  .ambient-2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 70%);
+    top: 30%; right: -150px;
+    animation: drift2 25s ease-in-out infinite;
+  }
+  .ambient-3 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(124,109,250,0.06) 0%, transparent 70%);
+    bottom: 10%; left: 20%;
+    animation: drift3 30s ease-in-out infinite;
+  }
+  @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,60px)} }
+  @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-50px,30px)} }
+  @keyframes drift3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-40px)} }
 
-.sidebar-footer{padding:12px;border-top:1px solid var(--b1)}
-.user-card{padding:12px 14px;border-radius:12px;background:var(--s1);border:1px solid var(--b1);display:flex;align-items:center;gap:10px;cursor:pointer;transition:background 0.2s}
-.user-card:hover{background:var(--s2)}
-.user-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--ac),#4d2fd4);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:12px;font-weight:800;color:#fff;flex-shrink:0;box-shadow:0 0 12px rgba(124,95,255,0.3)}
-.user-name{font-family:var(--fd);font-size:13px;font-weight:700;color:var(--t1);line-height:1.2;letter-spacing:-0.01em}
-.user-plan{font-size:10.5px;color:var(--ac2);font-weight:500;display:flex;align-items:center;gap:4px}
-.user-plan::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--ac);animation:planpulse 3s ease-in-out infinite}
-@keyframes planpulse{0%,100%{opacity:1}50%{opacity:0.4}}
+  /* LAYOUT */
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  section { position: relative; }
 
-/* ── MAIN AREA ── */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.topbar{height:58px;flex-shrink:0;border-bottom:1px solid var(--b1);background:rgba(4,5,14,0.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:16px}
-.tb-left{display:flex;align-items:center;gap:12px}
-.tb-crumb{font-family:var(--fd);font-size:14px;font-weight:700;color:var(--t1);letter-spacing:-0.02em}
-.tb-sub{font-size:11.5px;color:var(--t3);padding-left:12px;border-left:1px solid var(--b1);margin-left:4px}
-.tb-right{display:flex;align-items:center;gap:8px}
-.tb-btn{padding:7px 15px;border-radius:8px;font-size:12.5px;font-weight:600;font-family:var(--fd);cursor:pointer;border:1px solid var(--b2);background:var(--s1);color:var(--t2);transition:all 0.2s;letter-spacing:0.01em}
-.tb-btn:hover{background:var(--s2);color:var(--t1);border-color:var(--b2)}
-.tb-btn.cta{background:linear-gradient(135deg,var(--ac),#5b38d4);border-color:transparent;color:#fff;box-shadow:0 2px 16px rgba(124,95,255,0.3)}
-.tb-btn.cta:hover{opacity:0.88;box-shadow:0 4px 24px rgba(124,95,255,0.4)}
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 0;
+    background: rgba(8,8,16,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  nav.scrolled {
+    background: rgba(8,8,16,0.92);
+    border-bottom-color: var(--border2);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 700; font-size: 18px;
+    color: var(--text); text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 0 20px var(--glow);
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text2); text-decoration: none; font-size: 14px;
+    font-weight: 400; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .btn-ghost {
+    color: var(--text2); text-decoration: none; font-size: 14px;
+    font-weight: 500; padding: 8px 16px; border-radius: 8px;
+    transition: all 0.25s; background: transparent; border: none; cursor: pointer;
+    font-family: var(--font-body);
+  }
+  .btn-ghost:hover { color: var(--text); background: rgba(255,255,255,0.07); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    color: white; border: none; padding: 10px 22px; border-radius: 10px;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    font-family: var(--font-body);
+    box-shadow: 0 0 28px var(--glow), inset 0 1px 0 rgba(255,255,255,0.2);
+    transition: all 0.25s; text-decoration: none; display: inline-block;
+    letter-spacing: -0.1px;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 44px rgba(124,109,250,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 22px; height: 2px; background: var(--text2); border-radius: 2px; transition: all 0.3s; }
 
-.scroll-area{flex:1;overflow-y:auto;padding:28px 28px 40px;scrollbar-width:thin;scrollbar-color:rgba(124,95,255,0.2) transparent}
-.scroll-area::-webkit-scrollbar{width:3px}
-.scroll-area::-webkit-scrollbar-track{background:transparent}
-.scroll-area::-webkit-scrollbar-thumb{background:rgba(124,95,255,0.2);border-radius:2px}
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 140px 0 100px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-inner { width: 100%; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border2);
+    border-radius: 100px;
+    padding: 7px 18px 7px 10px;
+    font-size: 13px; color: var(--text2);
+    margin-bottom: 36px;
+    animation: fadeUp 0.8s ease both;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.8)} }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 68px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+  .hero h1 .line1 { display: block; color: var(--text); }
+  .hero h1 .line2 {
+    display: block;
+    background: linear-gradient(135deg, var(--accent2) 0%, var(--accent3) 60%, #ddd0ff 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--text2);
+    max-width: 540px; margin: 0 auto 44px;
+    font-weight: 300; line-height: 1.7;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+  .hero-actions {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+  .btn-lg {
+    padding: 16px 32px; font-size: 16px; font-weight: 600;
+    border-radius: 12px;
+  }
+  .btn-outline {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border2);
+    color: var(--text2); padding: 15px 28px;
+    border-radius: 12px; font-size: 15px; font-weight: 500;
+    cursor: pointer; font-family: var(--font-body);
+    transition: all 0.25s; text-decoration: none; display: inline-block;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+  }
+  .btn-outline:hover { border-color: var(--border3); color: var(--text); background: rgba(255,255,255,0.08); }
+  .hero-note {
+    margin-top: 20px; font-size: 13px; color: var(--text3);
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+  .hero-visual {
+    margin-top: 80px;
+    position: relative;
+    animation: fadeUp 0.8s ease 0.5s both;
+  }
+  .hero-screen {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius2);
+    padding: 24px;
+    max-width: 820px; margin: 0 auto;
+    box-shadow: var(--panel-shadow), 0 0 80px var(--glow2);
+    position: relative; overflow: hidden;
+  }
+  .hero-screen::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent2), transparent);
+  }
+  .screen-bar {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 20px;
+  }
+  .screen-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .screen-dot:nth-child(1) { background: #ff5f57; }
+  .screen-dot:nth-child(2) { background: #ffbd2e; }
+  .screen-dot:nth-child(3) { background: #28c840; }
+  .screen-title { margin-left: 8px; font-size: 12px; color: var(--text3); font-family: monospace; }
+  .screen-content {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .screen-card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border2);
+    border-radius: 14px; padding: 18px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .screen-card-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .screen-card-value { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--text); }
+  .screen-card-sub { font-size: 12px; color: var(--green); margin-top: 4px; }
+  .screen-bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 60px; margin-top: 12px; }
+  .bar { flex: 1; border-radius: 4px 4px 0 0; background: linear-gradient(to top, var(--accent), var(--accent2)); opacity: 0.7; transition: opacity 0.2s; }
+  .bar:hover { opacity: 1; }
+  .screen-stat { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .screen-stat:last-child { border-bottom: none; }
+  .screen-stat-name { font-size: 13px; color: var(--text2); }
+  .screen-stat-val { font-size: 13px; font-weight: 600; color: var(--accent3); }
 
-/* ── PAGE SYSTEM ── */
-.page{display:none}
-.page.active{display:block;animation:pageIn 0.35s cubic-bezier(0.16,1,0.3,1)}
-@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 
-/* ── GLASS SYSTEM ── */
-.g1{background:var(--s1);border:1px solid var(--b1);border-radius:16px}
-.g2{background:var(--s2);border:1px solid var(--b2);border-radius:16px}
-.gac{background:linear-gradient(135deg,rgba(124,95,255,0.1) 0%,rgba(80,55,200,0.06) 100%);border:1px solid var(--ba2);border-radius:16px}
-.card-hover{transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s}
-.card-hover:hover{transform:translateY(-3px);border-color:var(--ba);box-shadow:0 8px 40px rgba(0,0,0,0.3),0 0 30px var(--acg2)}
+  /* LOGOS */
+  .logos { padding: 52px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.015); backdrop-filter: blur(10px); }
+  .logos-label { text-align: center; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 28px; font-family: var(--font-display); }
+  .logos-row { display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; }
+  .logo-item {
+    font-family: var(--font-display); font-size: 14px; font-weight: 600;
+    color: var(--text3); letter-spacing: -0.2px; opacity: 0.45;
+    transition: opacity 0.25s;
+    padding: 6px 16px;
+    border: 1px solid transparent;
+    border-radius: 100px;
+  }
+  .logo-item:hover { opacity: 0.85; border-color: var(--border); background: rgba(255,255,255,0.04); }
 
-/* ══════════════════════════════════
-   DASHBOARD
-══════════════════════════════════ */
+  /* SECTIONS COMMON */
+  .section-label {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px;
+    color: var(--accent2); margin-bottom: 18px;
+    font-family: var(--font-display);
+  }
+  .section-label::before {
+    content: ''; width: 18px; height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  h2.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(34px, 4.5vw, 58px);
+    font-weight: 700; letter-spacing: -1.5px; line-height: 1.08;
+    margin-bottom: 20px;
+  }
+  .section-sub {
+    font-size: 17px; color: var(--text2); max-width: 500px;
+    line-height: 1.7; font-weight: 300;
+  }
+  .section-head { margin-bottom: 64px; }
+  .section-head.center { text-align: center; }
+  .section-head.center .section-label { justify-content: center; }
+  .section-head.center .section-sub { margin: 0 auto; }
 
-/* Welcome hero */
-.welcome{position:relative;overflow:hidden;padding:36px 40px;margin-bottom:22px;border-radius:20px;border:1px solid var(--ba2);background:linear-gradient(135deg,rgba(100,70,255,0.1) 0%,rgba(60,40,180,0.06) 50%,rgba(20,15,60,0.04) 100%)}
-.welcome-glow{position:absolute;top:-80px;right:-40px;width:380px;height:320px;background:radial-gradient(ellipse,rgba(124,95,255,0.18) 0%,transparent 65%);pointer-events:none;animation:wglow 6s ease-in-out infinite alternate}
-@keyframes wglow{0%{opacity:0.7;transform:scale(1)}100%{opacity:1;transform:scale(1.15)}}
-.welcome-glow2{position:absolute;bottom:-60px;left:30%;width:250px;height:200px;background:radial-gradient(ellipse,rgba(29,209,180,0.08) 0%,transparent 65%);pointer-events:none}
-.welcome-border-top{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(124,95,255,0.5) 40%,rgba(165,130,255,0.3) 60%,transparent)}
-.welcome-inner{position:relative;z-index:1}
-.welcome-eyebrow{display:inline-flex;align-items:center;gap:7px;font-family:var(--fd);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ac2);margin-bottom:14px;padding:5px 12px 5px 8px;background:rgba(124,95,255,0.1);border:1px solid rgba(124,95,255,0.2);border-radius:100px}
-.welcome-pulse{width:6px;height:6px;border-radius:50%;background:var(--ac);animation:wpulse 2s ease-in-out infinite}
-@keyframes wpulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(124,95,255,0.6)}50%{opacity:0.6;box-shadow:0 0 0 8px rgba(124,95,255,0)}}
-.welcome-h1{font-family:var(--fd);font-size:32px;font-weight:800;letter-spacing:-0.035em;line-height:1.1;color:var(--t1);margin-bottom:10px}
-.welcome-h1 em{font-style:normal;background:linear-gradient(135deg,var(--ac3) 0%,var(--ac2) 50%,var(--teal) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.welcome-sub{font-size:15px;color:var(--t2);max-width:540px;line-height:1.65;font-weight:300}
-.welcome-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
-.wbtn{padding:10px 20px;border-radius:10px;font-family:var(--fd);font-size:13px;font-weight:700;cursor:pointer;letter-spacing:-0.01em;transition:all 0.2s;border:none}
-.wbtn.fill{background:linear-gradient(135deg,var(--ac),#5230d4);color:#fff;box-shadow:0 2px 20px rgba(124,95,255,0.35)}
-.wbtn.fill:hover{opacity:0.88;box-shadow:0 4px 28px rgba(124,95,255,0.45);transform:translateY(-1px)}
-.wbtn.outline{background:var(--s2);border:1px solid var(--b2);color:var(--t2)}
-.wbtn.outline:hover{background:var(--s3);color:var(--t1);border-color:var(--ba)}
-.welcome-stat{position:absolute;right:40px;top:50%;transform:translateY(-50%);text-align:right;display:flex;flex-direction:column;gap:6px}
-@media(max-width:900px){.welcome-stat{display:none}}
-.ws-item{display:flex;flex-direction:column;align-items:flex-end}
-.ws-num{font-family:var(--fd);font-size:28px;font-weight:800;letter-spacing:-0.04em;color:var(--t1)}
-.ws-label{font-size:10.5px;color:var(--t3);letter-spacing:0.04em}
+  /* FEATURES */
+  .features { padding: 120px 0; }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+  }
+  .feat-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius2); padding: 36px;
+    transition: all 0.35s ease;
+    position: relative; overflow: hidden;
+    box-shadow: var(--panel-shadow);
+  }
+  .feat-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(124,109,250,0.06) 0%, transparent 55%);
+    opacity: 0; transition: opacity 0.35s;
+  }
+  .feat-card::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  }
+  .feat-card:hover { border-color: var(--border3); transform: translateY(-5px); box-shadow: 0 24px 64px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.09); }
+  .feat-card:hover::before { opacity: 1; }
+  .feat-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    background: linear-gradient(145deg, rgba(124,109,250,0.25), rgba(167,139,250,0.15));
+    border: 1px solid rgba(167,139,250,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin-bottom: 24px;
+    box-shadow: 0 0 24px var(--glow2), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .feat-card h3 {
+    font-family: var(--font-display); font-size: 20px; font-weight: 700;
+    letter-spacing: -0.4px; margin-bottom: 12px; color: var(--text);
+  }
+  .feat-card p { color: var(--text2); font-size: 15px; line-height: 1.75; font-weight: 300; }
+  .feat-card.large { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .feat-card.large .feat-visual {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 28px;
+    font-size: 13px; font-family: monospace; color: var(--text3); line-height: 2;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .feat-card.large .feat-visual .highlight { color: var(--accent3); }
+  .feat-card.large .feat-visual .green { color: var(--green); }
 
-/* Stats row */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
-.stat-c{padding:18px 20px;transition:transform 0.25s,border-color 0.25s;cursor:default}
-.stat-c:hover{transform:translateY(-2px);border-color:var(--b2)}
-.stat-lbl{font-family:var(--fd);font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
-.stat-val{font-family:var(--fd);font-size:28px;font-weight:800;letter-spacing:-0.04em;color:var(--t1);line-height:1;margin-bottom:5px}
-.stat-pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:100px;font-family:var(--fd)}
-.sp-neutral{background:var(--s2);color:var(--t3)}
-.sp-up{background:rgba(61,214,140,0.1);color:var(--green);border:1px solid rgba(61,214,140,0.18)}
+  /* PROCESS */
+  .process { padding: 120px 0; background: linear-gradient(180deg, transparent, var(--bg2) 20%, var(--bg2) 80%, transparent); }
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 64px; }
+  .process-step {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    padding: 36px 28px;
+    position: relative; overflow: hidden;
+    transition: all 0.35s ease;
+    box-shadow: var(--panel-shadow);
+  }
+  .process-step::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  }
+  .process-step:first-child { border-radius: var(--radius2) 0 0 var(--radius2); }
+  .process-step:last-child { border-radius: 0 var(--radius2) var(--radius2) 0; }
+  .process-step:hover { background: rgba(255,255,255,0.07); border-color: var(--border3); }
+  .process-step::after {
+    content: '→';
+    position: absolute; right: -14px; top: 50%; transform: translateY(-50%);
+    color: var(--border2); font-size: 20px; z-index: 2;
+  }
+  .process-step:last-child::after { display: none; }
+  .step-num {
+    font-family: var(--font-display); font-size: 11px; font-weight: 700;
+    color: var(--accent2); text-transform: uppercase; letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .step-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(145deg, rgba(124,109,250,0.2), rgba(167,139,250,0.1));
+    border: 1px solid rgba(167,139,250,0.18);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 20px;
+    box-shadow: 0 0 20px var(--glow2), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .process-step h3 {
+    font-family: var(--font-display); font-size: 20px; font-weight: 700;
+    letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .process-step p { font-size: 14px; color: var(--text2); line-height: 1.6; }
+  .step-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .step-tag {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--border2);
+    border-radius: 100px; padding: 4px 12px; font-size: 11px; color: var(--text3);
+    font-family: var(--font-body);
+  }
 
-/* Dashboard grid */
-.dash-grid{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+  /* RESULTS */
+  .results { padding: 120px 0; }
+  .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .result-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius2); padding: 36px;
+    transition: all 0.35s ease;
+    box-shadow: var(--panel-shadow);
+    position: relative; overflow: hidden;
+  }
+  .result-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  }
+  .result-card:hover { border-color: var(--border3); transform: translateY(-5px); box-shadow: 0 24px 64px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.09); }
+  .result-platform {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--text2); margin-bottom: 20px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--border2); border-radius: 100px; padding: 5px 14px;
+  }
+  .result-stat {
+    font-family: var(--font-display); font-size: 52px; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent2), var(--accent3));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1; margin-bottom: 8px;
+  }
+  .result-label { font-size: 14px; color: var(--text2); margin-bottom: 20px; }
+  .result-card h3 { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .result-card p { font-size: 14px; color: var(--text2); line-height: 1.6; }
 
-/* Quick actions */
-.qa-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
-.qa{padding:24px 22px 22px;cursor:pointer;position:relative;overflow:hidden;transition:transform 0.3s cubic-bezier(0.16,1,0.3,1),border-color 0.3s,background 0.3s,box-shadow 0.3s}
-.qa::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.3s;background:linear-gradient(135deg,rgba(124,95,255,0.08),transparent)}
-.qa::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(124,95,255,0.6),transparent);transform:scaleX(0);transition:transform 0.3s;transform-origin:center}
-.qa:hover{transform:translateY(-5px);border-color:var(--ba);box-shadow:0 16px 48px rgba(0,0,0,0.35),0 0 40px rgba(124,95,255,0.1)}
-.qa:hover::before{opacity:1}
-.qa:hover::after{transform:scaleX(1)}
-.qa-ico{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;transition:transform 0.25s,box-shadow 0.25s}
-.qa:hover .qa-ico{transform:scale(1.08)}
-.qa-ico.a{background:rgba(245,166,35,0.1);border:1px solid rgba(245,166,35,0.2);box-shadow:0 4px 16px rgba(245,166,35,0.1)}
-.qa-ico.b{background:rgba(124,95,255,0.12);border:1px solid var(--ba2);box-shadow:0 4px 16px rgba(124,95,255,0.12)}
-.qa-ico.c{background:rgba(29,209,180,0.08);border:1px solid rgba(29,209,180,0.18);box-shadow:0 4px 16px rgba(29,209,180,0.08)}
-.qa:hover .qa-ico.a{box-shadow:0 6px 24px rgba(245,166,35,0.2)}
-.qa:hover .qa-ico.b{box-shadow:0 6px 24px rgba(124,95,255,0.25)}
-.qa:hover .qa-ico.c{box-shadow:0 6px 24px rgba(29,209,180,0.18)}
-.qa-title{font-family:var(--fd);font-size:15px;font-weight:800;color:var(--t1);margin-bottom:6px;letter-spacing:-0.02em}
-.qa-desc{font-size:13px;color:var(--t2);line-height:1.55}
-.qa-arr{position:absolute;bottom:20px;right:20px;width:26px;height:26px;border-radius:7px;background:var(--s2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--t3);transition:all 0.25s}
-.qa:hover .qa-arr{background:var(--acg);border-color:var(--ba);color:var(--ac2);transform:translate(2px,-2px)}
+  /* BENEFITS */
+  .benefits { padding: 120px 0; background: linear-gradient(180deg, transparent, var(--bg2) 20%, var(--bg2) 80%, transparent); }
+  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .benefit-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius2); padding: 32px;
+    transition: all 0.35s ease;
+    box-shadow: var(--panel-shadow);
+    position: relative; overflow: hidden;
+  }
+  .benefit-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  }
+  .benefit-card:hover { border-color: var(--border3); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--glow2); }
+  .benefit-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(145deg, rgba(124,109,250,0.2), rgba(167,139,250,0.1));
+    border: 1px solid rgba(167,139,250,0.18);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 20px;
+    box-shadow: 0 0 20px var(--glow2), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .benefit-card h3 { font-family: var(--font-display); font-size: 17px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.3px; color: var(--text); }
+  .benefit-card p { font-size: 14px; color: var(--text2); line-height: 1.7; font-weight: 300; }
 
-/* Saved content */
-.c-tabs{display:flex;gap:4px;margin-bottom:14px}
-.ctab{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--fd);transition:all 0.2s;color:var(--t3);border:1px solid transparent}
-.ctab.on{background:var(--acg);border-color:var(--ba2);color:var(--ac2)}
-.ctab:hover:not(.on){background:var(--s2);color:var(--t2)}
-.empty-s{padding:48px 24px;text-align:center}
-.empty-ico{font-size:34px;margin-bottom:12px;opacity:0.5}
-.empty-h{font-family:var(--fd);font-size:14px;font-weight:700;color:var(--t2);margin-bottom:5px;letter-spacing:-0.01em}
-.empty-p{font-size:13px;color:var(--t3)}
-.e-btn{display:inline-block;margin-top:16px;padding:9px 20px;background:var(--ac);color:#fff;border-radius:9px;font-family:var(--fd);font-size:13px;font-weight:700;cursor:pointer;border:none;transition:opacity 0.2s,transform 0.15s;box-shadow:0 2px 16px rgba(124,95,255,0.3)}
-.e-btn:hover{opacity:0.88;transform:translateY(-1px)}
+  /* PRICING */
+  .pricing { padding: 120px 0; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
+  .price-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius2); padding: 36px;
+    position: relative; transition: all 0.35s ease;
+    box-shadow: var(--panel-shadow);
+    overflow: hidden;
+  }
+  .price-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
+  }
+  .price-card:hover { border-color: var(--border3); transform: translateY(-5px); box-shadow: 0 24px 64px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.09); }
+  .price-card.featured {
+    background: linear-gradient(145deg, rgba(124,109,250,0.14), rgba(167,139,250,0.07), rgba(255,255,255,0.04));
+    border-color: var(--border3);
+    box-shadow: 0 0 70px var(--glow2), 0 24px 64px rgba(0,0,0,0.4), inset 0 1px 0 rgba(167,139,250,0.2);
+    transform: scale(1.03);
+  }
+  .price-card.featured::before {
+    background: linear-gradient(90deg, transparent, rgba(167,139,250,0.3), transparent);
+  }
+  .price-card.featured:hover { transform: scale(1.03) translateY(-5px); }
+  .price-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white; font-size: 11px; font-weight: 700; padding: 4px 14px;
+    border-radius: 100px; text-transform: uppercase; letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .price-tier { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+  .price-amount { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
+  .price-amount .dollar { font-size: 28px; font-weight: 700; color: var(--text2); align-self: flex-start; margin-top: 6px; }
+  .price-amount .num { font-family: var(--font-display); font-size: 64px; font-weight: 800; letter-spacing: -3px; color: var(--text); line-height: 1; }
+  .price-amount .period { font-size: 14px; color: var(--text3); }
+  .price-desc { font-size: 14px; color: var(--text2); margin-bottom: 28px; line-height: 1.5; }
+  .price-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .price-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text2); }
+  .price-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .price-features li.muted { color: var(--text3); }
+  .price-features li.muted::before { content: '—'; color: var(--text3); }
+  .price-cta {
+    width: 100%; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: var(--font-body); transition: all 0.25s;
+    border: 1px solid var(--border2);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--text);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .price-cta:hover { background: rgba(255,255,255,0.1); border-color: var(--border3); color: var(--accent3); }
+  .price-card.featured .price-cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-color: transparent; color: white;
+    box-shadow: 0 0 32px var(--glow), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .price-card.featured .price-cta:hover { box-shadow: 0 0 52px rgba(124,109,250,0.45), inset 0 1px 0 rgba(255,255,255,0.2); transform: translateY(-2px); }
 
-/* ── SCORE PANEL ── */
-.score-panel{padding:26px;position:relative;overflow:hidden}
-.score-panel-glow{position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(ellipse,rgba(124,95,255,0.15) 0%,transparent 65%);pointer-events:none;animation:spglow 5s ease-in-out infinite alternate}
-@keyframes spglow{0%{opacity:0.6;transform:scale(1)}100%{opacity:1;transform:scale(1.2)}}
-.sp-eyebrow{font-family:var(--fd);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);margin-bottom:16px}
-.sp-score-row{display:flex;align-items:flex-end;gap:8px;margin-bottom:4px}
-.sp-big{font-family:var(--fd);font-size:64px;font-weight:800;letter-spacing:-0.06em;line-height:1;background:linear-gradient(135deg,var(--ac3),var(--ac2),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(124,95,255,0.4))}
-.sp-denom{font-family:var(--fd);font-size:22px;font-weight:600;color:var(--t3);margin-bottom:10px}
-.sp-verdict{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(61,214,140,0.1);border:1px solid rgba(61,214,140,0.2);border-radius:100px;font-family:var(--fd);font-size:11px;font-weight:700;color:var(--green);margin-bottom:22px}
-.sp-verdict::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);animation:verdpulse 2s ease-in-out infinite}
-@keyframes verdpulse{0%,100%{opacity:1}50%{opacity:0.3}}
-.sp-bars{display:flex;flex-direction:column;gap:14px}
-.sp-bar-item{}
-.sp-bar-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
-.sp-bar-name{font-size:12px;color:var(--t2);font-weight:400}
-.sp-bar-val{font-family:var(--fd);font-size:12px;font-weight:700;letter-spacing:-0.01em}
-.sp-track{height:3px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:visible;position:relative}
-.sp-fill{height:100%;border-radius:2px;position:relative;transition:width 1.5s cubic-bezier(0.34,1.56,0.64,1)}
-.sp-fill::after{content:'';position:absolute;right:-2px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:inherit;box-shadow:0 0 8px currentColor;filter:brightness(1.5)}
-.sp-bottom{margin-top:18px;padding-top:16px;border-top:1px solid var(--b1);font-size:12px;color:var(--t3);display:flex;align-items:center;justify-content:space-between}
-.sp-rec{font-family:var(--fd);font-size:12px;font-weight:700;color:var(--ac2)}
+  /* TESTIMONIALS */
+  .testimonials { padding: 120px 0; background: linear-gradient(180deg, transparent, var(--bg2) 20%, var(--bg2) 80%, transparent); }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .testi-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius2); padding: 36px;
+    transition: all 0.35s ease;
+    box-shadow: var(--panel-shadow);
+    position: relative; overflow: hidden;
+  }
+  .testi-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
+  }
+  .testi-card:hover { border-color: var(--border3); transform: translateY(-5px); box-shadow: 0 24px 64px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.09); }
+  .testi-stars { color: var(--gold); font-size: 13px; margin-bottom: 18px; letter-spacing: 3px; }
+  .testi-quote { font-size: 15px; color: var(--text); line-height: 1.8; margin-bottom: 24px; font-style: italic; font-weight: 300; opacity: 0.9; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: 1px solid rgba(167,139,250,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 13px; color: white;
+    flex-shrink: 0;
+    box-shadow: 0 0 16px var(--glow2);
+  }
+  .testi-name { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--text); }
+  .testi-handle { font-size: 12px; color: var(--text3); margin-top: 2px; }
 
-/* Insight card */
-.insight-card{padding:20px;position:relative;overflow:hidden;margin-top:0}
-.insight-shimmer{position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(124,95,255,0.04),transparent);animation:shimline 4s ease-in-out infinite}
-@keyframes shimline{0%{left:-100%}100%{left:200%}}
-.insight-label{font-family:var(--fd);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ac2);margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.insight-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(124,95,255,0.2),transparent)}
-.insight-text{font-size:13.5px;color:var(--t1);line-height:1.65;font-style:italic;font-weight:300}
-.insight-text strong{font-style:normal;font-weight:600;color:var(--ac2)}
-.insight-sig{font-family:var(--fd);font-size:11px;color:var(--t3);margin-top:10px;font-weight:500}
+  /* FAQ */
+  .faq { padding: 120px 0; }
+  .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+    transition: all 0.25s ease;
+    box-shadow: var(--panel-shadow);
+  }
+  .faq-item.open { border-color: var(--border3); box-shadow: 0 8px 40px rgba(0,0,0,0.35), 0 0 30px var(--glow2); }
+  .faq-q {
+    padding: 22px 26px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-display); font-size: 15px; font-weight: 600;
+    user-select: none; transition: color 0.25s; color: var(--text);
+    letter-spacing: -0.2px;
+  }
+  .faq-q:hover { color: var(--accent3); }
+  .faq-arrow {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; transition: transform 0.3s; flex-shrink: 0;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+  .faq-a { padding: 0 26px; max-height: 0; overflow: hidden; transition: all 0.35s ease; color: var(--text2); font-size: 15px; line-height: 1.75; font-weight: 300; }
+  .faq-item.open .faq-a { padding: 0 26px 24px; max-height: 200px; }
 
-/* Trends */
-.trend-card{padding:20px}
-.trend-label{font-family:var(--fd);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);margin-bottom:12px}
-.t-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
-.t-item:last-child{border-bottom:none}
-.t-num{font-family:var(--fd);font-size:10.5px;font-weight:700;color:var(--t4);min-width:18px}
-.t-txt{font-size:13px;color:var(--t2);flex:1;line-height:1.4}
-.t-arrow{font-size:11px;color:var(--green);font-family:var(--fd);font-weight:700}
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 72px 0 40px;
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand .logo { margin-bottom: 16px; }
+  .footer-brand p { font-size: 14px; color: var(--text3); line-height: 1.75; max-width: 260px; font-weight: 300; }
+  .footer-col h4 { font-family: var(--font-display); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text3); margin-bottom: 18px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul a { font-size: 14px; color: var(--text3); text-decoration: none; transition: color 0.2s; font-weight: 300; }
+  .footer-col ul a:hover { color: var(--text2); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--border); }
+  .footer-copy { font-size: 13px; color: var(--text3); font-weight: 300; }
+  .footer-social { display: flex; gap: 12px; }
+  .social-link {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; text-decoration: none; transition: all 0.25s;
+    color: var(--text3);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+  }
+  .social-link:hover { border-color: var(--border3); color: var(--accent3); background: rgba(124,109,250,0.1); }
 
-/* ══ IDEA GENERATOR ══ */
-.tool-wrap{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start}
-.input-card{padding:24px}
-.i-label{font-family:var(--fd);font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);display:block;margin-bottom:7px}
-.field-ta{width:100%;background:rgba(255,255,255,0.025);border:1px solid var(--b1);border-radius:11px;color:var(--t1);font-family:var(--fb);font-size:14px;padding:13px 15px;resize:none;outline:none;transition:border-color 0.2s,background 0.2s;line-height:1.6}
-.field-ta:focus{border-color:var(--ba);background:rgba(255,255,255,0.035)}
-.field-ta::placeholder{color:var(--t4)}
-.field-sel{width:100%;background:rgba(255,255,255,0.025);border:1px solid var(--b1);border-radius:10px;color:var(--t2);font-family:var(--fb);font-size:13.5px;padding:10px 14px;outline:none;cursor:pointer;transition:border-color 0.2s;-webkit-appearance:none}
-.field-sel:focus{border-color:var(--ba)}
-.field-sel option{background:#0d1228;color:var(--t1)}
-.chips{display:flex;flex-wrap:wrap;gap:7px}
-.chip{padding:6px 13px;border-radius:100px;font-size:12.5px;font-weight:600;cursor:pointer;border:1px solid var(--b1);background:var(--s1);color:var(--t2);transition:all 0.2s;font-family:var(--fd);letter-spacing:0.01em}
-.chip:hover{border-color:var(--b2);color:var(--t1)}
-.chip.on{background:var(--acg);border-color:var(--ba);color:var(--ac2)}
-.gen-btn{width:100%;padding:15px;border-radius:12px;background:linear-gradient(135deg,var(--ac) 0%,#5230d4 100%);color:#fff;font-family:var(--fd);font-size:15px;font-weight:800;border:none;cursor:pointer;letter-spacing:-0.02em;transition:opacity 0.2s,transform 0.15s,box-shadow 0.2s;position:relative;overflow:hidden;box-shadow:0 4px 24px rgba(124,95,255,0.35)}
-.gen-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.12) 0%,transparent 50%);pointer-events:none}
-.gen-btn:hover{opacity:0.9;transform:translateY(-1px);box-shadow:0 8px 32px rgba(124,95,255,0.45)}
-.gen-btn:active{transform:translateY(1px)}
-.gen-btn.busy{opacity:0.65;cursor:wait}
-.sp2{position:relative;overflow:hidden}
-.sp2::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(124,95,255,0.04) 50%,transparent 100%);animation:shimmer 2s ease-in-out infinite}
-@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
-.ideas-out{display:none;margin-top:4px}
-.ideas-list{display:flex;flex-direction:column;gap:10px}
-.idea-c{padding:18px 20px;border-radius:14px;background:var(--s1);border:1px solid var(--b1);cursor:pointer;transition:transform 0.2s,border-color 0.25s,background 0.2s;position:relative;overflow:hidden}
-.idea-c::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:2px 0 0 2px;background:linear-gradient(to bottom,var(--ac),var(--teal));opacity:0;transition:opacity 0.25s}
-.idea-c:hover{transform:translateY(-2px);border-color:var(--ba);background:var(--s2)}
-.idea-c:hover::before{opacity:1}
-.idea-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
-.idea-title{font-family:var(--fd);font-size:14px;font-weight:700;color:var(--t1);letter-spacing:-0.015em;line-height:1.35}
-.idea-pill{flex-shrink:0;font-family:var(--fd);font-size:10px;font-weight:700;padding:3px 9px;border-radius:100px}
-.ip-hi{background:rgba(61,214,140,0.1);color:var(--green);border:1px solid rgba(61,214,140,0.2)}
-.ip-md{background:rgba(245,166,35,0.1);color:var(--amber);border:1px solid rgba(245,166,35,0.2)}
-.idea-desc{font-size:13px;color:var(--t2);line-height:1.55}
-.idea-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
-.it{font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:4px;background:var(--s2);color:var(--t3);font-family:var(--fd)}
+  /* CTA BANNER */
+  .cta-banner {
+    padding: 80px 0; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-banner::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(124,109,250,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-inner {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border3);
+    border-radius: 32px; padding: 80px 48px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 0 100px var(--glow2), var(--panel-shadow);
+  }
+  .cta-inner::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent2), transparent);
+  }
+  .cta-inner h2 { font-family: var(--font-display); font-size: clamp(30px,4.5vw,52px); font-weight: 700; letter-spacing: -1.5px; margin-bottom: 16px; color: var(--text); }
+  .cta-inner p { font-size: 17px; color: var(--text2); margin-bottom: 40px; font-weight: 300; line-height: 1.7; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-/* ══ SCRIPT GENERATOR ══ */
-.script-wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
-.script-out{padding:24px;min-height:420px;position:relative}
-.script-out-head{font-family:var(--fd);font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
-.cp-btn{padding:6px 13px;border-radius:7px;background:var(--s2);border:1px solid var(--b1);color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;font-family:var(--fd);transition:all 0.2s}
-.cp-btn:hover{background:var(--s3);color:var(--t1);border-color:var(--b2)}
-.script-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;text-align:center;gap:10px}
-.script-body{font-size:14px;color:var(--t1);line-height:1.8;white-space:pre-wrap;font-family:var(--fb)}
-.s-tag{display:inline-block;font-family:var(--fd);font-size:9.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ac2);background:var(--acg);border:1px solid var(--ba2);padding:2px 8px;border-radius:4px;margin-bottom:3px}
-.blink{display:inline-block;width:2px;height:15px;background:var(--ac);border-radius:1px;animation:blink 1s step-end infinite;vertical-align:middle}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ══ CLIP ASSIST ══ */
-.clip-wrap{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start}
-.drop-z{padding:48px 24px;text-align:center;cursor:pointer;transition:border-color 0.3s,background 0.3s;border:1.5px dashed var(--b1);border-radius:16px;background:var(--s1)}
-.drop-z:hover{border-color:var(--ba);background:var(--acg2)}
-.hook-item{padding:14px 16px;border-radius:11px;margin-bottom:9px;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;border-left:3px solid}
-.hook-item:hover{transform:translateX(3px)}
-.hi-a{background:rgba(124,95,255,0.06);border-color:var(--ac)}
-.hi-b{background:rgba(29,209,180,0.05);border-color:var(--teal)}
-.hi-c{background:rgba(245,166,35,0.05);border-color:var(--amber)}
-.hi-lbl{font-family:var(--fd);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;justify-content:space-between}
-.hi-a .hi-lbl{color:var(--ac2)} .hi-b .hi-lbl{color:var(--teal)} .hi-c .hi-lbl{color:var(--amber)}
-.hi-txt{font-size:13.5px;color:var(--t1);line-height:1.5}
-.improve-item{padding:12px 14px;border-radius:10px;font-size:13.5px;color:var(--t1);line-height:1.55;margin-bottom:8px;border-left:3px solid}
-.ii-p{background:rgba(124,95,255,0.06);border-color:var(--ac)}
-.ii-g{background:rgba(61,214,140,0.05);border-color:var(--green)}
-.ii-w{background:rgba(245,166,35,0.05);border-color:var(--amber)}
+  /* WHY DIFFERENT */
+  .different { padding: 120px 0; }
+  .diff-grid {
+    display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0;
+    align-items: start; margin-top: 64px;
+  }
+  .diff-col { display: flex; flex-direction: column; gap: 12px; }
+  .diff-col-label {
+    font-family: var(--font-display); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px; color: var(--text3);
+    margin-bottom: 8px;
+  }
+  .ethereal-label { color: var(--accent2) !important; }
+  .diff-item {
+    padding: 14px 18px; border-radius: var(--radius);
+    font-size: 14px; font-weight: 300; line-height: 1.5;
+    display: flex; align-items: center; gap: 10px;
+    backdrop-filter: blur(12px);
+  }
+  .diff-item::before { font-size: 14px; flex-shrink: 0; }
+  .diff-item.bad {
+    background: rgba(239,68,68,0.05);
+    border: 1px solid rgba(239,68,68,0.12);
+    color: var(--text2);
+  }
+  .diff-item.bad::before { content: '✕'; color: rgba(239,68,68,0.5); }
+  .diff-item.good {
+    background: rgba(124,109,250,0.07);
+    border: 1px solid var(--border3);
+    color: var(--text);
+  }
+  .diff-item.good::before { content: '✓'; color: var(--green); font-weight: 700; }
+  .diff-divider {
+    display: flex; align-items: center; justify-content: center;
+    padding-top: 44px;
+  }
+  .diff-logo {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: white;
+    box-shadow: 0 0 30px var(--glow);
+  }
 
-/* ══ SECTION TITLES ══ */
-.sec-title{font-family:var(--fd);font-size:18px;font-weight:800;letter-spacing:-0.025em;color:var(--t1);margin-bottom:4px}
-.sec-sub{font-size:13px;color:var(--t2);margin-bottom:20px;font-weight:300}
-.mb14{margin-bottom:14px} .mb16{margin-bottom:16px} .mb18{margin-bottom:18px} .mb20{margin-bottom:20px} .mb22{margin-bottom:22px}
+  /* ONBOARDING SECTION */
+  .onboarding { padding: 120px 0; background: linear-gradient(180deg, transparent, var(--bg2) 20%, var(--bg2) 80%, transparent); }
+  .onboarding-flow {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    align-items: start; margin-top: 64px;
+  }
+  .onboard-steps { display: flex; flex-direction: column; }
+  .onboard-step {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .onboard-num {
+    font-family: var(--font-display); font-size: 11px; font-weight: 700;
+    color: var(--accent2); letter-spacing: 2px;
+    width: 28px; flex-shrink: 0; padding-top: 16px;
+  }
+  .onboard-content {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 20px;
+    flex: 1;
+    box-shadow: var(--panel-shadow);
+    position: relative;
+  }
+  .onboard-content::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  }
+  .onboard-q {
+    font-family: var(--font-display); font-size: 15px; font-weight: 600;
+    color: var(--text); margin-bottom: 6px; letter-spacing: -0.2px;
+  }
+  .onboard-hint { font-size: 13px; color: var(--text3); font-weight: 300; }
+  .onboard-connector {
+    width: 1px; height: 20px;
+    background: linear-gradient(to bottom, var(--border2), transparent);
+    margin: 4px 0 4px 13px;
+  }
+  .onboard-output {
+    background: rgba(124,109,250,0.07);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border3);
+    border-radius: var(--radius2); padding: 32px;
+    box-shadow: var(--panel-shadow), 0 0 60px var(--glow2);
+    position: relative; overflow: hidden;
+  }
+  .onboard-output::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(167,139,250,0.4), transparent);
+  }
+  .onboard-response-label {
+    font-family: var(--font-display); font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px; color: var(--accent2);
+    margin-bottom: 16px;
+  }
+  .onboard-response { }
+  .response-line {
+    font-family: var(--font-display); font-size: 22px; font-weight: 700;
+    color: var(--text); margin-bottom: 20px; letter-spacing: -0.5px;
+  }
+  .response-body { display: flex; flex-direction: column; gap: 12px; }
+  .response-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 14px; color: var(--text2); line-height: 1.7; font-weight: 300;
+  }
+  .response-item strong { color: var(--text); font-weight: 600; }
+  .response-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent2); flex-shrink: 0; margin-top: 7px;
+    box-shadow: 0 0 8px var(--accent);
+  }
 
-@media(max-width:900px){
-  .sidebar{display:none}
-  .dash-grid,.tool-wrap,.script-wrap,.clip-wrap,.stats-row{grid-template-columns:1fr}
-  .stats-row{grid-template-columns:1fr 1fr}
-  .qa-row{grid-template-columns:1fr}
-  .scroll-area{padding:20px}
-}
+  /* MOBILE */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: rgba(8,8,16,0.98); padding: 24px;
+      border-bottom: 1px solid var(--border);
+      gap: 20px;
+    }
+    .features-grid { grid-template-columns: 1fr; }
+    .feat-card.large { grid-column: span 1; grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .process-step { border-radius: var(--radius) !important; }
+    .process-step::after { display: none; }
+    .results-grid { grid-template-columns: 1fr; }
+    .benefits-grid { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .price-card.featured { transform: scale(1); }
+    .testi-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .hero { padding: 120px 0 80px; }
+    .screen-content { grid-template-columns: 1fr; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .diff-divider { display: none; }
+    .onboarding-flow { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .process-grid { grid-template-columns: 1fr; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 16px; }
+    .cta-inner { padding: 48px 24px; }
+  }
 </style>
 </head>
 <body>
 
-<div class="bg-canvas">
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
-</div>
-<div class="noise"></div>
+<!-- AMBIENT -->
+<div class="ambient ambient-1"></div>
+<div class="ambient ambient-2"></div>
+<div class="ambient ambient-3"></div>
 
-<div class="app">
-
-  <!-- ══════ SIDEBAR ══════ -->
-  <aside class="sidebar">
-    <div class="sidebar-logo" onclick="showPage('dashboard',null)">
-      <div class="logo-gem"><span class="logo-gem-inner">✦</span></div>
-      <div>
-        <div class="logo-wordmark">Ethereal <span>AI Studios</span></div>
-        <div class="logo-tagline">Content Command Center</div>
+<!-- NAV -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">✦</div>
+      Ethereal AI Studios
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#process">How it Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://app.etherealaistudio.com" class="btn-ghost">Sign in</a>
+      <a href="https://app.etherealaistudio.com" class="btn-primary">Start Free</a>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
       </div>
     </div>
+  </div>
+</nav>
 
-    <nav class="sidebar-nav">
-      <div class="nav-group-label">Workspace</div>
-      <a class="nav-item active" onclick="showPage('dashboard',this)">
-        <span class="nav-icon">⊞</span> Dashboard
-      </a>
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        Not just another AI tool — a personal content strategist
+      </div>
+      <h1>
+        <span class="line1">Stop guessing what to post.</span>
+        <span class="line2">Start creating content that hits.</span>
+      </h1>
+      <p class="hero-sub">Ethereal understands your style, your audience, and what actually performs — then helps you create content that connects and grows.</p>
+      <div class="hero-actions">
+        <a href="https://app.etherealaistudio.com" class="btn-primary btn-lg">Find out what works for you →</a>
+        <a href="#different" class="btn-outline">See how it's different</a>
+      </div>
+      <p class="hero-note">No credit card required · Free 7-day trial</p>
 
-      <div class="nav-group-label">Create</div>
-      <a class="nav-item" onclick="showPage('ideas',this)">
-        <span class="nav-icon">💡</span> Idea Generator
-      </a>
-      <a class="nav-item" onclick="showPage('script',this)">
-        <span class="nav-icon">✍️</span> Script Generator
-      </a>
-      <a class="nav-item" onclick="showPage('clip',this)">
-        <span class="nav-icon">🎬</span> Clip Assist
-      </a>
+      <div class="hero-visual">
+        <div class="hero-screen">
+          <div class="screen-bar">
+            <div class="screen-dot"></div>
+            <div class="screen-dot"></div>
+            <div class="screen-dot"></div>
+            <span class="screen-title">app.etherealaistudio.com — Dashboard</span>
+          </div>
+          <div class="screen-content">
+            <div class="screen-card">
+              <div class="screen-card-label">Ideas Generated</div>
+              <div class="screen-card-value">2,847</div>
+              <div class="screen-card-sub">↑ 34% this week</div>
+              <div class="screen-bar-chart">
+                <div class="bar" style="height:40%"></div>
+                <div class="bar" style="height:55%"></div>
+                <div class="bar" style="height:35%"></div>
+                <div class="bar" style="height:70%"></div>
+                <div class="bar" style="height:60%"></div>
+                <div class="bar" style="height:85%"></div>
+                <div class="bar" style="height:100%"></div>
+              </div>
+            </div>
+            <div class="screen-card">
+              <div class="screen-card-label">Content Performance</div>
+              <div class="screen-stat"><span class="screen-stat-name">Niche check</span><span class="screen-stat-val">✓ Matched</span></div>
+              <div class="screen-stat"><span class="screen-stat-name">Hook score</span><span class="screen-stat-val">94/100</span></div>
+              <div class="screen-stat"><span class="screen-stat-name">Platform fit</span><span class="screen-stat-val">TikTok ✓</span></div>
+              <div class="screen-stat"><span class="screen-stat-name">Trend match</span><span class="screen-stat-val">↑ High</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div class="nav-group-label">Intelligence</div>
-      <a class="nav-item" onclick="showPage('winner',this)">
-        <span class="nav-icon">🏆</span> Pick the Winner
-        <span class="nav-badge">PRO</span>
-      </a>
-    </nav>
+<!-- LOGOS -->
+<section class="logos">
+  <div class="container">
+    <div class="logos-label">Creators posting on</div>
+    <div class="logos-row">
+      <div class="logo-item">TikTok</div>
+      <div class="logo-item">Instagram</div>
+      <div class="logo-item">YouTube</div>
+      <div class="logo-item">Twitter / X</div>
+      <div class="logo-item">LinkedIn</div>
+      <div class="logo-item">Snapchat</div>
+    </div>
+  </div>
+</section>
 
-    <div class="sidebar-footer">
-      <div class="user-card">
-        <div class="user-av">C</div>
+<!-- WHY DIFFERENT -->
+<section class="different" id="different">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="section-label">Why Ethereal</div>
+      <h2 class="section-title">Most AI tools generate content.<br>Ethereal builds creators.</h2>
+      <p class="section-sub">There's a difference between a tool that outputs content and one that actually understands you.</p>
+    </div>
+    <div class="diff-grid reveal">
+      <div class="diff-col diff-col-other">
+        <div class="diff-col-label">Other AI Tools</div>
+        <div class="diff-item bad">Generic ideas — not built for your niche</div>
+        <div class="diff-item bad">No memory — starts from scratch every time</div>
+        <div class="diff-item bad">Just outputs — never improves you</div>
+        <div class="diff-item bad">Same for everyone — no personalisation</div>
+        <div class="diff-item bad">Tells you what to post — not why it works</div>
+      </div>
+      <div class="diff-divider">
+        <div class="diff-logo">✦</div>
+      </div>
+      <div class="diff-col diff-col-ethereal">
+        <div class="diff-col-label ethereal-label">Ethereal</div>
+        <div class="diff-item good">Personalised to your voice, niche &amp; audience</div>
+        <div class="diff-item good">Learns what works for you over time</div>
+        <div class="diff-item good">Challenges and improves your creative instincts</div>
+        <div class="diff-item good">Built around your identity as a creator</div>
+        <div class="diff-item good">Teaches you to think like a strategist</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONBOARDING MOMENT -->
+<section class="onboarding" id="onboarding">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="section-label">First 2 Minutes</div>
+      <h2 class="section-title">This is what happens<br>when you first open Ethereal.</h2>
+      <p class="section-sub">Before Ethereal creates anything, it gets to know you. This is your wow moment.</p>
+    </div>
+    <div class="onboarding-flow reveal">
+      <div class="onboard-steps">
+        <div class="onboard-step">
+          <div class="onboard-num">01</div>
+          <div class="onboard-content">
+            <div class="onboard-q">"What are you building — and who is it for?"</div>
+            <div class="onboard-hint">Ethereal maps your niche, audience, and platform</div>
+          </div>
+        </div>
+        <div class="onboard-connector"></div>
+        <div class="onboard-step">
+          <div class="onboard-num">02</div>
+          <div class="onboard-content">
+            <div class="onboard-q">"What should people feel in the first 3 seconds?"</div>
+            <div class="onboard-hint">It learns your hook style and emotional tone</div>
+          </div>
+        </div>
+        <div class="onboard-connector"></div>
+        <div class="onboard-step">
+          <div class="onboard-num">03</div>
+          <div class="onboard-content">
+            <div class="onboard-q">"What's actually worked for you before?"</div>
+            <div class="onboard-hint">It finds your pattern and builds on your strengths</div>
+          </div>
+        </div>
+      </div>
+      <div class="onboard-output">
+        <div class="onboard-response-label">Ethereal responds:</div>
+        <div class="onboard-response">
+          <div class="response-line">"Alright… I see you. 👀"</div>
+          <div class="response-body">
+            <div class="response-item">
+              <span class="response-dot"></span>
+              "You're building a creator brand focused on <strong>personal finance for 20-somethings</strong> — practical, no fluff, slightly edge."
+            </div>
+            <div class="response-item">
+              <span class="response-dot"></span>
+              "Your strongest angle is <strong>emotional connection through real numbers</strong> — your audience wants proof, not theory."
+            </div>
+            <div class="response-item">
+              <span class="response-dot"></span>
+              "You're currently playing slightly safe with your hooks. <strong>Let's fix that.</strong>"
+            </div>
+          </div>
+        </div>
+        <a href="https://app.etherealaistudio.com" class="btn-primary" style="margin-top:24px;display:inline-block;">Build your creator profile →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Everything you need.<br>Nothing you don't.</h2>
+      <p class="section-sub">Four powerful tools that take you from blank screen to posted content — faster than ever.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon">💡</div>
+        <h3>Idea Engine</h3>
+        <p>Dump your brain. We'll shape it. Type a rough idea, a keyword, or a trending topic — Ethereal turns scattered thoughts into content directions worth pursuing.</p>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0.1s">
+        <div class="feat-icon">📝</div>
+        <h3>Script Generator</h3>
+        <p>Your voice. AI speed. Get a scroll-stopping script in seconds — written in your tone, for your audience. Edit freely, or post as-is.</p>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0.2s">
+        <div class="feat-icon">🎬</div>
+        <h3>Clip Creator</h3>
+        <p>Studio-quality visuals, no studio needed. Auto-generate B-roll, captions, and cuts that match your script. No editing timeline. No guesswork.</p>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0.3s">
+        <div class="feat-icon">🚀</div>
+        <h3>Post Ready Mode</h3>
+        <p>One click. Every platform. Schedule or publish instantly to TikTok, Instagram, YouTube, and more. Your content lands exactly when your audience is watching.</p>
+      </div>
+      <div class="feat-card large reveal" style="transition-delay:0.1s">
         <div>
-          <div class="user-name">Creator</div>
-          <div class="user-plan">Pro Plan Active</div>
+          <div class="feat-icon">🏆</div>
+          <h3>Pick the Winner</h3>
+          <p>Stop guessing. Start growing. Our AI scores your content variations and tells you which one is most likely to perform — before you hit post.</p>
+          <br>
+          <p style="color:var(--text3);font-size:13px;">Available on Pro plan · Powered by performance data from 10M+ pieces of content</p>
+        </div>
+        <div class="feat-visual">
+          <div style="color:var(--text3);margin-bottom:8px">// Content Score Analysis</div>
+          <div><span class="highlight">hook_score:</span> <span class="green">94</span> / 100</div>
+          <div><span class="highlight">retention_estimate:</span> <span class="green">78%</span></div>
+          <div><span class="highlight">trend_alignment:</span> <span class="green">HIGH</span></div>
+          <div><span class="highlight">platform_fit:</span> <span class="green">TikTok ✓</span></div>
+          <div style="margin-top:12px;color:var(--green)">→ Recommended: Variant B</div>
         </div>
       </div>
     </div>
-  </aside>
+  </div>
+</section>
 
-  <!-- ══════ MAIN ══════ -->
-  <div class="main">
-
-    <div class="topbar">
-      <div class="tb-left">
-        <div style="display:flex;align-items:center;gap:9px;padding-right:16px;border-right:1px solid var(--b1);cursor:pointer" onclick="showPage('dashboard',null)">
-          <div style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#8c6fff,#4d2fd4);display:flex;align-items:center;justify-content:center;font-size:12px;box-shadow:0 0 12px rgba(124,95,255,0.35);flex-shrink:0">✦</div>
-          <div>
-            <div style="font-family:var(--fd);font-size:13px;font-weight:800;color:var(--t1);letter-spacing:-0.025em;line-height:1">Ethereal <span style="color:var(--ac2)">AI Studios</span></div>
-          </div>
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">From idea to posted — in minutes.</h2>
+      <p class="section-sub">Four steps. Zero friction. Built for creators who'd rather be creating.</p>
+    </div>
+    <div class="process-grid reveal">
+      <div class="process-step">
+        <div class="step-num">01 / Idea</div>
+        <div class="step-icon">💭</div>
+        <h3>Drop Your Idea</h3>
+        <p>Paste a topic, trend, or rough thought. Ethereal shapes it into content worth making.</p>
+        <div class="step-tags">
+          <span class="step-tag">Niche check</span>
+          <span class="step-tag">Trend check</span>
+          <span class="step-tag">Hook check</span>
         </div>
-        <span class="tb-crumb" id="tb-title" style="font-size:13px;font-weight:600;color:var(--t2)">Dashboard</span>
-        <span class="tb-sub" id="tb-sub">Your content command center</span>
       </div>
-      <div class="tb-right">
-        <button class="tb-btn" onclick="showPage('ideas',null)">+ New Idea</button>
-        <button class="tb-btn cta" onclick="showPage('script',null)">✍️ Write Script</button>
+      <div class="process-step">
+        <div class="step-num">02 / Script</div>
+        <div class="step-icon">✍️</div>
+        <h3>Script in Seconds</h3>
+        <p>Your voice, AI speed. Get a full scroll-stopping script ready to record.</p>
+        <div class="step-tags">
+          <span class="step-tag">Tone match</span>
+          <span class="step-tag">Platform fit</span>
+          <span class="step-tag">Hook first</span>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03 / Clip</div>
+        <div class="step-icon">🎞️</div>
+        <h3>Generate Your Clips</h3>
+        <p>Auto-generate visuals, captions and cuts matched to your script. No timeline needed.</p>
+        <div class="step-tags">
+          <span class="step-tag">Auto captions</span>
+          <span class="step-tag">B-roll</span>
+          <span class="step-tag">Smart cuts</span>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04 / Post</div>
+        <div class="step-icon">📤</div>
+        <h3>Post & Perform</h3>
+        <p>Schedule to every platform with one click. Know what performs before you post.</p>
+        <div class="step-tags">
+          <span class="step-tag">Multi-platform</span>
+          <span class="step-tag">Best time</span>
+          <span class="step-tag">Analytics</span>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="scroll-area">
+<!-- CREATOR RESULTS -->
+<section class="results" id="results">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="section-label">Creator Results</div>
+      <h2 class="section-title">Creators are already winning.</h2>
+      <p class="section-sub">Real results from real creators using Ethereal every day.</p>
+    </div>
+    <div class="results-grid">
+      <div class="result-card reveal">
+        <div class="result-platform">📱 TikTok</div>
+        <div class="result-stat">3×</div>
+        <div class="result-label">Views in 30 days</div>
+        <h3>From inconsistent to daily</h3>
+        <p>Went from posting once a week to every single day. Views tripled in a month without burning out.</p>
+      </div>
+      <div class="result-card reveal" style="transition-delay:0.1s">
+        <div class="result-platform">📸 Instagram Reels</div>
+        <div class="result-stat">10 min</div>
+        <div class="result-label">Script time (was 3 hours)</div>
+        <h3>Faster scripts, better performance</h3>
+        <p>I used to spend 3 hours writing scripts. Now it takes 10 minutes — and they actually perform better.</p>
+      </div>
+      <div class="result-card reveal" style="transition-delay:0.2s">
+        <div class="result-platform">▶️ YouTube Shorts</div>
+        <div class="result-stat">+52K</div>
+        <div class="result-label">Followers gained</div>
+        <h3>Pick the Winner changed everything</h3>
+        <p>Stopped guessing which content to post. Pick the Winner told me exactly what would land — and it did.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- ══ DASHBOARD ══ -->
-      <div class="page active" id="page-dashboard">
+<!-- BENEFITS -->
+<section class="benefits" id="benefits">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">Benefits</div>
+      <h2 class="section-title">Built for how<br>creators actually work.</h2>
+      <p class="section-sub">No bloated tools. No learning curves. Just results.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">⚡</div>
+        <h3>Move at creator speed</h3>
+        <p>Go from idea to posted in minutes, not hours. Trends don't wait — and now neither do you.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.1s">
+        <div class="benefit-icon">🎯</div>
+        <h3>Your voice, always</h3>
+        <p>Ethereal learns your tone, style, and audience. Every script sounds like you wrote it yourself.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.2s">
+        <div class="benefit-icon">📊</div>
+        <h3>Know before you post</h3>
+        <p>Content scoring tells you what will perform before it goes live. Stop guessing, start growing.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.1s">
+        <div class="benefit-icon">🌍</div>
+        <h3>Every platform, one place</h3>
+        <p>TikTok, Instagram, YouTube, X — optimised formats for every channel from a single workflow.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.2s">
+        <div class="benefit-icon">🔋</div>
+        <h3>Stop burning out</h3>
+        <p>Consistency kills creators. Ethereal handles the heavy lifting so you can focus on the craft.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.3s">
+        <div class="benefit-icon">🚀</div>
+        <h3>Built to scale with you</h3>
+        <p>From your first 1K to your first million — Ethereal grows with your audience and ambitions.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Welcome hero block -->
-        <div class="welcome mb22">
-          <div class="welcome-glow"></div>
-          <div class="welcome-glow2"></div>
-          <div class="welcome-border-top"></div>
-          <div class="welcome-inner">
-            <div class="welcome-eyebrow"><div class="welcome-pulse"></div>Personal Content Strategist · Active</div>
-            <div class="welcome-h1">Alright… <em>I see you.</em> 👀</div>
-            <div class="welcome-sub">You're building something real. Your strongest angle is emotional connection — your audience wants proof, not theory. Let's make today's content hit harder.</div>
-            <div class="welcome-actions">
-              <button class="wbtn fill" onclick="showPage('ideas',null)">✦ Start Creating</button>
-              <button class="wbtn outline" onclick="showPage('winner',null)">See your scores →</button>
-            </div>
-          </div>
-          <div class="welcome-stat">
-            <div class="ws-item">
-              <div class="ws-num" style="background:linear-gradient(135deg,var(--ac3),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">94</div>
-              <div class="ws-label">Hook Score</div>
-            </div>
-            <div class="ws-item">
-              <div class="ws-num">↑ High</div>
-              <div class="ws-label">Trend Alignment</div>
-            </div>
-          </div>
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Simple pricing.<br>Serious results.</h2>
+      <p class="section-sub">Try free for 7 days. No credit card needed. Cancel anytime.</p>
+    </div>
+    <div class="pricing-grid">
+      <!-- FREE TRIAL -->
+      <div class="price-card reveal">
+        <div class="price-tier">Free Trial</div>
+        <div class="price-amount">
+          <span class="num" style="font-size:52px;letter-spacing:-2px;">7 days</span>
         </div>
-
-        <!-- Stats -->
-        <div class="stats-row mb22">
-          <div class="g1 stat-c">
-            <div class="stat-lbl">Ideas Saved</div>
-            <div class="stat-val">0</div>
-            <div class="stat-pill sp-neutral">Start here →</div>
-          </div>
-          <div class="g1 stat-c">
-            <div class="stat-lbl">Scripts Made</div>
-            <div class="stat-val">0</div>
-            <div class="stat-pill sp-neutral">Write first</div>
-          </div>
-          <div class="g1 stat-c">
-            <div class="stat-lbl">Clips Scored</div>
-            <div class="stat-val">0</div>
-            <div class="stat-pill sp-neutral">Upload one</div>
-          </div>
-          <div class="g1 stat-c">
-            <div class="stat-lbl">Avg Hook Score</div>
-            <div class="stat-val">—</div>
-            <div class="stat-pill sp-neutral">No data yet</div>
-          </div>
+        <p class="price-desc">Try Ethereal free and see how fast content creation can feel. No credit card required.</p>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Full platform access</li>
+          <li>Ideas, scripts &amp; clips</li>
+          <li>Content scoring</li>
+          <li>Multi-platform export</li>
+          <li>No commitment</li>
+          <li class="muted">Pick the Winner</li>
+          <li class="muted">Voice training</li>
+        </ul>
+        <button class="price-cta" onclick="window.location.href='https://app.etherealaistudio.com'">Try Ethereal Free</button>
+      </div>
+      <!-- CREATOR -->
+      <div class="price-card featured reveal" style="transition-delay:0.1s">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-tier">Creator</div>
+        <div class="price-amount">
+          <span class="dollar">£</span>
+          <span class="num">9</span>
+          <span class="period">/ month</span>
         </div>
+        <p class="price-desc">For creators ready to post consistently and grow their audience.</p>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Unlimited idea generation</li>
+          <li>Unlimited scripts</li>
+          <li>Clip assist access</li>
+          <li>Viral score insights</li>
+          <li>Post-ready tools</li>
+          <li>Multi-platform export</li>
+          <li>Email support</li>
+          <li class="muted">Pick the Winner</li>
+        </ul>
+        <button class="price-cta" onclick="window.location.href='https://app.etherealaistudio.com'">Start Free Trial</button>
+      </div>
+      <!-- PRO -->
+      <div class="price-card reveal" style="transition-delay:0.2s">
+        <div class="price-tier">Pro</div>
+        <div class="price-amount">
+          <span class="dollar">£</span>
+          <span class="num">19</span>
+          <span class="period">/ month</span>
+        </div>
+        <p class="price-desc">For creators who want to scale faster with advanced content tools.</p>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Unlimited ideas &amp; scripts</li>
+          <li>Unlimited clips</li>
+          <li>Pick the Winner AI</li>
+          <li>Advanced viral intelligence</li>
+          <li>Voice &amp; style training</li>
+          <li>Priority support</li>
+          <li>Early feature access</li>
+        </ul>
+        <button class="price-cta" onclick="window.location.href='https://app.etherealaistudio.com'">Go Pro</button>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="dash-grid">
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="section-label">Social Proof</div>
+      <h2 class="section-title">Creators love Ethereal.</h2>
+      <p class="section-sub">Real words from real creators — not polished marketing copy.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"This called out my exact problem better than I could explain it myself. I didn't realise how safe I was playing until Ethereal told me."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MR</div>
           <div>
-            <!-- Quick actions -->
-            <div class="sec-title mb14">Jump Into Your Workflow</div>
-            <div class="qa-row mb22">
-              <div class="g1 qa" onclick="showPage('ideas',null)">
-                <div class="qa-ico a">💡</div>
-                <div class="qa-title">Start With an Idea</div>
-                <div class="qa-desc">Dump any thought. We'll shape it into content worth making.</div>
-                <div class="qa-arr">↗</div>
-              </div>
-              <div class="g1 qa" onclick="showPage('script',null)">
-                <div class="qa-ico b">✍️</div>
-                <div class="qa-title">Turn It Into a Script</div>
-                <div class="qa-desc">Your voice, AI speed. Scroll-stopping scripts in seconds.</div>
-                <div class="qa-arr">↗</div>
-              </div>
-              <div class="g1 qa" onclick="showPage('clip',null)">
-                <div class="qa-ico c">🎬</div>
-                <div class="qa-title">Analyse Your Clip</div>
-                <div class="qa-desc">Score your content and find exactly what to improve.</div>
-                <div class="qa-arr">↗</div>
-              </div>
-            </div>
-
-            <!-- Saved content -->
-            <div class="sec-title mb14">Saved Content</div>
-            <div class="c-tabs">
-              <div class="ctab on" onclick="ctab(this)">All</div>
-              <div class="ctab" onclick="ctab(this)">Ideas</div>
-              <div class="ctab" onclick="ctab(this)">Scripts</div>
-              <div class="ctab" onclick="ctab(this)">Clips</div>
-            </div>
-            <div class="g1">
-              <div class="empty-s">
-                <div class="empty-ico">✦</div>
-                <div class="empty-h">Nothing saved yet</div>
-                <div class="empty-p">Start generating content and save your favourites here.</div>
-                <button class="e-btn" onclick="showPage('ideas',null)">Generate your first idea</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right column -->
-          <div style="display:flex;flex-direction:column;gap:16px">
-
-            <!-- Score panel - signature feature -->
-            <div class="gac score-panel">
-              <div class="score-panel-glow"></div>
-              <div style="position:relative;z-index:1">
-                <div class="sp-eyebrow">Content Score · Last Analysis</div>
-                <div class="sp-score-row">
-                  <div class="sp-big" id="sp-score-num">94</div>
-                  <div class="sp-denom">/100</div>
-                </div>
-                <div class="sp-verdict">High Performance</div>
-                <div class="sp-bars">
-                  <div class="sp-bar-item">
-                    <div class="sp-bar-head">
-                      <span class="sp-bar-name">Hook Strength</span>
-                      <span class="sp-bar-val" style="color:var(--ac2)">94</span>
-                    </div>
-                    <div class="sp-track"><div class="sp-fill" style="width:0%;background:linear-gradient(to right,var(--ac),var(--ac2))" data-w="94"></div></div>
-                  </div>
-                  <div class="sp-bar-item">
-                    <div class="sp-bar-head">
-                      <span class="sp-bar-name">Retention Est.</span>
-                      <span class="sp-bar-val" style="color:var(--teal)">78%</span>
-                    </div>
-                    <div class="sp-track"><div class="sp-fill" style="width:0%;background:linear-gradient(to right,var(--teal),#4af0d8)" data-w="78"></div></div>
-                  </div>
-                  <div class="sp-bar-item">
-                    <div class="sp-bar-head">
-                      <span class="sp-bar-name">Trend Alignment</span>
-                      <span class="sp-bar-val" style="color:var(--green)">HIGH</span>
-                    </div>
-                    <div class="sp-track"><div class="sp-fill" style="width:0%;background:linear-gradient(to right,var(--green),#6affb0)" data-w="88"></div></div>
-                  </div>
-                  <div class="sp-bar-item">
-                    <div class="sp-bar-head">
-                      <span class="sp-bar-name">Platform Fit</span>
-                      <span class="sp-bar-val" style="color:var(--amber)">TikTok ✓</span>
-                    </div>
-                    <div class="sp-track"><div class="sp-fill" style="width:0%;background:linear-gradient(to right,var(--amber),#ffd06e)" data-w="91"></div></div>
-                  </div>
-                </div>
-                <div class="sp-bottom">
-                  <span>Recommended variant</span>
-                  <span class="sp-rec">Variant B →</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Today's Insight — magic moment -->
-            <div class="gac insight-card">
-              <div class="insight-shimmer"></div>
-              <div style="position:relative;z-index:1">
-                <div class="insight-label">✦ Today's Insight</div>
-                <div class="insight-text" id="insight-text" style="opacity:0">You're playing it safe with your hooks. <strong>Your audience wants proof, not theory.</strong> The creators winning right now are leading with a real number or a real moment — not a question.</div>
-                <div class="insight-sig" id="insight-sig" style="opacity:0">— Ethereal, based on your content pattern</div>
-              </div>
-            </div>
-
-            <!-- Trending -->
-            <div class="g1 trend-card">
-              <div class="trend-label">🔥 Trending Right Now</div>
-              <div class="t-item"><span class="t-num">01</span><span class="t-txt">Quiet budgeting — why it's growing fast</span><span class="t-arrow">↑</span></div>
-              <div class="t-item"><span class="t-num">02</span><span class="t-txt">Day-in-the-life creator content</span><span class="t-arrow">↑</span></div>
-              <div class="t-item"><span class="t-num">03</span><span class="t-txt">Real numbers, no filters finance</span><span class="t-arrow">↑</span></div>
-              <div class="t-item"><span class="t-num">04</span><span class="t-txt">3-second hook challenge format</span><span class="t-arrow">↑</span></div>
-            </div>
-
+            <div class="testi-name">Maya R.</div>
+            <div class="testi-handle">Lifestyle Creator · 84K followers</div>
           </div>
         </div>
       </div>
-
-      <!-- ══ IDEA GENERATOR ══ -->
-      <div class="page" id="page-ideas">
-        <div class="sec-title mb14">Idea Generator</div>
-        <div class="sec-sub">Dump your brain. We'll shape it into content worth making.</div>
-        <div class="tool-wrap">
+      <div class="testi-card reveal" style="transition-delay:0.1s">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"It feels like having a real strategist, not an AI tool. The difference is it actually pushes back on weak ideas instead of just validating everything."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JK</div>
           <div>
-            <div class="g1 input-card mb16">
-              <label class="i-label mb16">What's on your mind?</label>
-              <textarea class="field-ta mb18" rows="4" id="idea-input" placeholder="A rough idea, trending topic, or anything — e.g. 'money mistakes in your 20s' or 'why most people stay broke'..."></textarea>
-              <label class="i-label mb16" style="margin-top:4px">Your Niche</label>
-              <select class="field-sel mb18" id="idea-niche">
-                <option value="">Select your niche...</option>
-                <option>Personal Finance</option><option>Fitness &amp; Health</option><option>Lifestyle</option>
-                <option>Business &amp; Entrepreneurship</option><option>Relationships</option>
-                <option>Tech &amp; AI</option><option>Gaming</option><option>Food &amp; Cooking</option><option>Travel</option>
-              </select>
-              <label class="i-label mb16" style="margin-top:4px">Platform</label>
-              <div class="chips mb18">
-                <div class="chip on" onclick="tc(this)">TikTok</div>
-                <div class="chip" onclick="tc(this)">Instagram</div>
-                <div class="chip" onclick="tc(this)">YouTube</div>
-                <div class="chip" onclick="tc(this)">Twitter / X</div>
-                <div class="chip" onclick="tc(this)">LinkedIn</div>
-              </div>
-              <label class="i-label mb16" style="margin-top:4px">Tone</label>
-              <div class="chips mb20">
-                <div class="chip on" onclick="tc(this)">Honest &amp; Raw</div>
-                <div class="chip" onclick="tc(this)">Educational</div>
-                <div class="chip" onclick="tc(this)">Entertaining</div>
-                <div class="chip" onclick="tc(this)">Motivational</div>
-                <div class="chip" onclick="tc(this)">Controversial</div>
-              </div>
-              <button class="gen-btn" id="idea-btn" onclick="genIdeas()">✦ Generate Ideas</button>
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:14px">
-            <div class="g1 trend-card">
-              <div class="trend-label">🔥 Trending Angles</div>
-              <div class="t-item"><span class="t-num">01</span><span class="t-txt">The real cost of lifestyle inflation</span><span class="t-arrow">↑</span></div>
-              <div class="t-item"><span class="t-num">02</span><span class="t-txt">What nobody tells you about saving</span><span class="t-arrow">↑</span></div>
-              <div class="t-item"><span class="t-num">03</span><span class="t-txt">I tried X for 30 days — results</span><span class="t-arrow">↑</span></div>
-              <div class="t-item"><span class="t-num">04</span><span class="t-txt">Silent habit killing your goals</span><span class="t-arrow">↑</span></div>
-            </div>
-            <div class="g1" style="padding:18px">
-              <div class="trend-label">⚡ Pro tip</div>
-              <div style="font-size:13px;color:var(--t2);line-height:1.7">Add <span style="color:var(--ac2);font-weight:600">a real number, emotion, or specific moment</span> to your prompt — the more specific, the sharper the ideas.</div>
-            </div>
-          </div>
-        </div>
-        <div class="ideas-out" id="ideas-out">
-          <div class="sec-title mb14">Generated Ideas</div>
-          <div class="ideas-list" id="ideas-list"></div>
-        </div>
-      </div>
-
-      <!-- ══ SCRIPT GENERATOR ══ -->
-      <div class="page" id="page-script">
-        <div class="sec-title mb14">Script Generator</div>
-        <div class="sec-sub">Your voice, AI speed. Scroll-stopping scripts in seconds.</div>
-        <div class="script-wrap">
-          <div class="g1 input-card">
-            <label class="i-label mb16">Script topic or idea</label>
-            <textarea class="field-ta mb18" rows="3" id="script-topic" placeholder="e.g. 'I lived on £800/month for 6 months — here's what happened'"></textarea>
-            <label class="i-label mb16" style="margin-top:4px">Script style</label>
-            <div class="chips mb18">
-              <div class="chip on" onclick="tc(this)">Story-led</div>
-              <div class="chip" onclick="tc(this)">Educational</div>
-              <div class="chip" onclick="tc(this)">Controversial take</div>
-              <div class="chip" onclick="tc(this)">Tutorial</div>
-              <div class="chip" onclick="tc(this)">List format</div>
-            </div>
-            <label class="i-label mb16" style="margin-top:4px">Length</label>
-            <div class="chips mb18">
-              <div class="chip" onclick="tc(this)">15 sec</div>
-              <div class="chip on" onclick="tc(this)">30–60 sec</div>
-              <div class="chip" onclick="tc(this)">60–90 sec</div>
-              <div class="chip" onclick="tc(this)">2–3 min</div>
-            </div>
-            <label class="i-label mb16" style="margin-top:4px">Platform</label>
-            <select class="field-sel mb20">
-              <option>TikTok</option><option>Instagram Reels</option>
-              <option>YouTube Shorts</option><option>YouTube</option><option>Twitter / X</option>
-            </select>
-            <button class="gen-btn" id="script-btn" onclick="genScript()">✦ Generate Script</button>
-          </div>
-          <div class="g1 script-out">
-            <div class="script-out-head">
-              <span>Script Output</span>
-              <button class="cp-btn" id="cp-btn" style="display:none" onclick="cpScript()">Copy</button>
-            </div>
-            <div id="script-result">
-              <div class="script-ph">
-                <div style="font-size:32px;opacity:0.3">✍️</div>
-                <div style="font-family:var(--fd);font-size:14px;font-weight:600;color:var(--t2)">Your script will appear here</div>
-                <div style="font-size:12px;color:var(--t3)">Fill in the fields and hit generate</div>
-              </div>
-            </div>
+            <div class="testi-name">Jordan K.</div>
+            <div class="testi-handle">Fitness Creator · 210K followers</div>
           </div>
         </div>
       </div>
-
-      <!-- ══ CLIP ASSIST ══ -->
-      <div class="page" id="page-clip">
-        <div class="sec-title mb14">Clip Assist</div>
-        <div class="sec-sub">Drop your content. Get hooks, scores, and exactly what to fix.</div>
-        <div class="clip-wrap">
+      <div class="testi-card reveal" style="transition-delay:0.2s">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"I've tried every AI content tool. Ethereal is the first one that actually learns me — not just my niche, but how I think and what makes my content work."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">PS</div>
           <div>
-            <div class="drop-z mb16" onclick="simClip()">
-              <div style="font-size:38px;margin-bottom:14px;opacity:0.65">🎬</div>
-              <div style="font-family:var(--fd);font-size:15px;font-weight:700;color:var(--t1);margin-bottom:6px">Drop your clip or paste a URL</div>
-              <div style="font-size:13px;color:var(--t2);margin-bottom:14px">TikTok, Instagram, YouTube or video upload</div>
-              <div style="font-size:12px;color:var(--t3);font-style:italic">Click to simulate an analysis →</div>
-            </div>
-            <div id="clip-results" style="display:none">
-              <div class="g1 input-card mb14">
-                <div class="i-label mb14">Hook Analysis</div>
-                <div class="hook-item hi-a"><div class="hi-lbl">Hook A — Winner <span>94/100</span></div><div class="hi-txt">"I lived on £800 a month for 6 months — and it broke every rule I thought I knew about money."</div></div>
-                <div class="hook-item hi-b"><div class="hi-lbl">Hook B — Strong <span>81/100</span></div><div class="hi-txt">"Most people think budgeting is about cutting things. It's actually about knowing your real number."</div></div>
-                <div class="hook-item hi-c"><div class="hi-lbl">Hook C — Test <span>67/100</span></div><div class="hi-txt">"Here's what happens when you track every single penny for half a year."</div></div>
-              </div>
-              <div class="g1 input-card">
-                <div class="i-label mb14">What to Improve</div>
-                <div class="improve-item ii-p">🎯 <strong>Hook timing:</strong> Your first emotional beat lands at 4.2s. Aim for under 2s for TikTok retention.</div>
-                <div class="improve-item ii-g">✓ <strong>Pacing:</strong> Strong. Average cut at 2.8s matches platform best practice.</div>
-                <div class="improve-item ii-w">⚡ <strong>CTA:</strong> Missing a clear call-to-action in the final 3 seconds. Add one.</div>
-              </div>
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:14px">
-            <div class="gac score-panel" id="clip-sp">
-              <div style="position:relative;z-index:1">
-                <div class="sp-eyebrow">Clip Score</div>
-                <div class="sp-score-row">
-                  <div class="sp-big" id="clip-snum" style="font-size:48px">—</div>
-                </div>
-                <div class="sp-bars" style="opacity:0.3" id="clip-bars">
-                  <div class="sp-bar-item"><div class="sp-bar-head"><span class="sp-bar-name">Hook</span><span class="sp-bar-val" style="color:var(--ac2)">—</span></div><div class="sp-track"><div class="sp-fill" style="width:0%;background:linear-gradient(to right,var(--ac),var(--ac2))" data-w="87"></div></div></div>
-                  <div class="sp-bar-item"><div class="sp-bar-head"><span class="sp-bar-name">Retention</span><span class="sp-bar-val" style="color:var(--teal)">—</span></div><div class="sp-track"><div class="sp-fill" style="width:0%;background:linear-gradient(to right,var(--teal),#4af0d8)" data-w="74"></div></div></div>
-                  <div class="sp-bar-item"><div class="sp-bar-head"><span class="sp-bar-name">Platform Fit</span><span class="sp-bar-val" style="color:var(--amber)">—</span></div><div class="sp-track"><div class="sp-fill" style="width:0%;background:linear-gradient(to right,var(--amber),#ffd06e)" data-w="91"></div></div></div>
-                </div>
-              </div>
-            </div>
-            <div class="g1" style="padding:20px">
-              <div class="trend-label">📐 Platform Specs</div>
-              <div class="t-item"><span style="font-size:12px;color:var(--t2);flex:1">TikTok ideal</span><span style="font-size:12px;color:var(--ac2);font-family:var(--fd);font-weight:700">15–34s</span></div>
-              <div class="t-item"><span style="font-size:12px;color:var(--t2);flex:1">Instagram Reels</span><span style="font-size:12px;color:var(--ac2);font-family:var(--fd);font-weight:700">7–15s</span></div>
-              <div class="t-item"><span style="font-size:12px;color:var(--t2);flex:1">YouTube Shorts</span><span style="font-size:12px;color:var(--ac2);font-family:var(--fd);font-weight:700">60s max</span></div>
-              <div class="t-item"><span style="font-size:12px;color:var(--t2);flex:1">Hook window</span><span style="font-size:12px;color:var(--amber);font-family:var(--fd);font-weight:700">Under 2s</span></div>
-            </div>
+            <div class="testi-name">Priya S.</div>
+            <div class="testi-handle">Finance Creator · 52K followers</div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <!-- ══ PICK THE WINNER ══ -->
-      <div class="page" id="page-winner">
-        <div class="sec-title mb14">Pick the Winner</div>
-        <div class="sec-sub">Stop guessing which content to post. AI tells you what will land — before you publish.</div>
-        <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start">
-          <div class="g1 input-card">
-            <label class="i-label mb16">Variant A</label>
-            <textarea class="field-ta mb18" rows="3" placeholder="Paste your first hook or script here..."></textarea>
-            <label class="i-label mb16">Variant B</label>
-            <textarea class="field-ta mb18" rows="3" placeholder="Paste your second version here..."></textarea>
-            <label class="i-label mb16">Variant C <span style="color:var(--t4);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
-            <textarea class="field-ta mb18" rows="3" placeholder="Add a third variation..."></textarea>
-            <select class="field-sel mb20">
-              <option>TikTok</option><option>Instagram Reels</option><option>YouTube Shorts</option>
-            </select>
-            <button class="gen-btn" onclick="alert('Pick the Winner is a Pro feature — you\'re on the Pro plan, so you\'re all set! Connect your content to activate.')">🏆 Pick the Winner</button>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:14px">
-            <div class="gac" style="padding:26px;position:relative;overflow:hidden">
-              <div class="score-panel-glow"></div>
-              <div style="position:relative;z-index:1">
-                <div style="font-size:30px;margin-bottom:14px">🏆</div>
-                <div style="font-family:var(--fd);font-size:15px;font-weight:800;color:var(--t1);margin-bottom:8px;letter-spacing:-0.02em">How it works</div>
-                <div style="font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:16px">Paste up to 3 content variants. Ethereal scores each on hook strength, retention signals, trend alignment, and platform fit — then tells you exactly which one to post and why.</div>
-                <div style="display:flex;flex-direction:column;gap:8px">
-                  <div style="display:flex;gap:8px;align-items:center;font-size:13px;color:var(--t2)"><span style="color:var(--ac2)">✓</span>Hook strength scoring</div>
-                  <div style="display:flex;gap:8px;align-items:center;font-size:13px;color:var(--t2)"><span style="color:var(--ac2)">✓</span>Retention estimate</div>
-                  <div style="display:flex;gap:8px;align-items:center;font-size:13px;color:var(--t2)"><span style="color:var(--ac2)">✓</span>Platform fit analysis</div>
-                  <div style="display:flex;gap:8px;align-items:center;font-size:13px;color:var(--t2)"><span style="color:var(--ac2)">✓</span>Clear winner + reasoning</div>
-                </div>
-              </div>
-            </div>
-          </div>
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Questions? We've got answers.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Do I need video editing experience?
+          <div class="faq-arrow">↓</div>
         </div>
+        <div class="faq-a">Not at all. Ethereal handles the heavy lifting — scripts, clips, captions, and cuts. You just bring the idea. No timeline, no technical skills needed.</div>
       </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How does the free trial work?
+          <div class="faq-arrow">↓</div>
+        </div>
+        <div class="faq-a">You get full access to Ethereal for 7 days — no credit card required. Ideas, scripts, clips, scoring, everything. At the end of your trial, choose a plan that fits. No pressure, no auto-charge.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can I cancel anytime?
+          <div class="faq-arrow">↓</div>
+        </div>
+        <div class="faq-a">Yes. No contracts, no commitments, no painful cancellation flows. Cancel in one click from your dashboard — no questions asked.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What platforms does Ethereal support?
+          <div class="faq-arrow">↓</div>
+        </div>
+        <div class="faq-a">TikTok, Instagram Reels, YouTube Shorts, Twitter/X, and more. Each export is automatically optimised for the platform's format and best practices.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How does voice training work?
+          <div class="faq-arrow">↓</div>
+        </div>
+        <div class="faq-a">On the Pro plan, Ethereal analyses your existing content and learns your tone, vocabulary, and style. Every script it generates sounds like you wrote it — not an AI.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What is Pick the Winner?
+          <div class="faq-arrow">↓</div>
+        </div>
+        <div class="faq-a">Pick the Winner is our AI scoring system. Give it multiple content variations and it tells you which one is most likely to perform — based on hook strength, trend alignment, retention signals, and platform fit — before you post.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    </div><!-- /scroll-area -->
-  </div><!-- /main -->
-</div><!-- /app -->
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2>You don't need more ideas.<br>You need the right ones.</h2>
+      <p>Let Ethereal show you what actually works for you — your voice, your audience, your growth.</p>
+      <div class="cta-actions">
+        <a href="https://app.etherealaistudio.com" class="btn-primary btn-lg">Start with your strategist →</a>
+        <a href="#pricing" class="btn-outline">View Pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">✦</div>
+          Ethereal AI Studios
+        </a>
+        <p>Built for creators. Powered by AI. Turn ideas into viral content in minutes — not hours.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="https://app.etherealaistudio.com">Dashboard</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Help Centre</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Ethereal AI Studios. All rights reserved.</div>
+      <div class="footer-social">
+        <a href="#" class="social-link">𝕏</a>
+        <a href="#" class="social-link">▶</a>
+        <a href="#" class="social-link">📸</a>
+        <a href="#" class="social-link">🎵</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
-// ── Page navigation
-const pageInfo = {
-  dashboard:{title:'Dashboard',sub:'Your content command center'},
-  ideas:{title:'Idea Generator',sub:'Turn any thought into content worth making'},
-  script:{title:'Script Generator',sub:'Your voice, AI speed'},
-  clip:{title:'Clip Assist',sub:'Score and improve your content'},
-  winner:{title:'Pick the Winner',sub:'Know what will perform before you post'}
-};
-function showPage(id, el) {
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const pg = document.getElementById('page-'+id);
-  if(pg) pg.classList.add('active');
-  if(el) el.classList.add('active');
-  else document.querySelectorAll('.nav-item').forEach(n=>{
-    if((n.getAttribute('onclick')||'').includes("'"+id+"'")) n.classList.add('active');
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
   });
-  const inf = pageInfo[id]||{title:id,sub:''};
-  document.getElementById('tb-title').textContent = inf.title;
-  document.getElementById('tb-sub').textContent = inf.sub;
-}
 
-// ── Chip toggle
-function tc(el){ el.classList.toggle('on') }
-function ctab(el){ document.querySelectorAll('.ctab').forEach(t=>t.classList.remove('on')); el.classList.add('on') }
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
 
-// ── Animate score bars on load
-function animateBars(container) {
-  container.querySelectorAll('.sp-fill[data-w]').forEach((f,i)=>{
-    setTimeout(()=>{ f.style.width = f.dataset.w + '%' }, 400 + i*150);
-  });
-}
+  // FAQ
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
 
-// ── Insight reveal — magic moment
-function revealInsight() {
-  const words = document.getElementById('insight-text');
-  const sig = document.getElementById('insight-sig');
-  if(!words) return;
-  setTimeout(()=>{
-    words.style.transition = 'opacity 0.8s ease';
-    words.style.opacity = '1';
-    setTimeout(()=>{
-      sig.style.transition = 'opacity 0.6s ease';
-      sig.style.opacity = '1';
-    }, 600);
-  }, 1200);
-}
-
-// ── Init
-window.addEventListener('DOMContentLoaded', ()=>{
-  animateBars(document.querySelector('.score-panel'));
-  revealInsight();
-});
-
-// ── Idea generator
-const IDEAS = [
-  {t:"I lived on £800/month for 6 months — here's what nobody tells you",d:"A personal story-led piece revealing the psychological shift that happens when you restrict spending. Ends with a counter-intuitive insight your audience hasn't heard before.",s:"hi",tags:["Story","Finance","TikTok","Hook: 94"]},
-  {t:"The real reason most people stay broke (it's not what you think)",d:"Controversial take targeting lifestyle inflation. Designed to create strong agree/disagree reactions that drive comments and shares.",s:"hi",tags:["Controversial","Finance","TikTok","Viral potential"]},
-  {t:"3 money rules I wish someone had told me at 22",d:"Educational list format with strong personal authority. Each rule should be non-obvious — avoid generic advice. Your audience wants truths, not tips.",s:"md",tags:["Educational","List","Instagram","Authority"]},
-  {t:"What happens to your brain when you check your bank balance every day",d:"Psychology angle with a surprising hook. References behaviour change science but delivered in creator language. Strong for short-form YouTube.",s:"md",tags:["Psychology","Science","YouTube","Hook: 81"]}
-];
-function genIdeas(){
-  const btn = document.getElementById('idea-btn');
-  btn.textContent='Generating…';btn.classList.add('busy');btn.disabled=true;
-  setTimeout(()=>{
-    btn.textContent='✦ Generate Ideas';btn.classList.remove('busy');btn.disabled=false;
-    const out = document.getElementById('ideas-out');
-    const list = document.getElementById('ideas-list');
-    out.style.display='block'; list.innerHTML='';
-    IDEAS.forEach((idea,i)=>{
-      setTimeout(()=>{
-        const c = document.createElement('div');
-        c.className='idea-c';
-        c.innerHTML=`<div class="idea-top"><div class="idea-title">${idea.t}</div><div class="idea-pill ${idea.s==='hi'?'ip-hi':'ip-md'}">${idea.s==='hi'?'High Impact':'Good'}</div></div><div class="idea-desc">${idea.d}</div><div class="idea-tags">${idea.tags.map(t=>`<span class="it">${t}</span>`).join('')}</div>`;
-        c.onclick=()=>{ document.getElementById('script-topic').value=idea.t; showPage('script',null); };
-        list.appendChild(c);
-      },i*130);
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
     });
-    out.scrollIntoView({behavior:'smooth',block:'start'});
-  },1900);
-}
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-// ── Script generator
-const SCRIPT=`[HOOK — 0–2 seconds]
-"I lived on £800 a month for six months — and it broke every rule I thought I knew about money."
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-[SETUP — 2–8 seconds]
-"I didn't do it because I had to. I did it as an experiment. And what I found wasn't about budgeting — it was about identity."
-
-[BODY — 8–40 seconds]
-"Here's what actually happened:
-
-Month one: pure restriction. Anxious, counting every coffee.
-
-Month two: something shifted. I stopped seeing money as something to spend — and started seeing it as a tool.
-
-Month three: I had £200 left at the end of the month. For the first time in my life.
-
-But here's the thing nobody tells you — it wasn't the saving that changed me. It was watching my future self get closer."
-
-[THE TURN — real insight]
-"The problem isn't that people don't know how to budget. It's that they've never felt the power of a financial buffer. Once you feel it — you can't go back."
-
-[CTA — final 3 seconds]
-"I'm documenting the whole thing. Follow if you want the full breakdown — and save this if it hit."`;
-
-function genScript(){
-  const btn=document.getElementById('script-btn');
-  btn.textContent='Writing…';btn.classList.add('busy');btn.disabled=true;
-  const res=document.getElementById('script-result');
-  res.innerHTML='<div style="padding:20px;display:flex;flex-direction:column;gap:10px">'+Array(7).fill(0).map((_,i)=>`<div class="sp2" style="height:${i%3===0?13:9}px;width:${55+Math.random()*38}%;border-radius:4px"></div>`).join('')+'</div>';
-  setTimeout(()=>{
-    btn.textContent='✦ Generate Script';btn.classList.remove('busy');btn.disabled=false;
-    document.getElementById('cp-btn').style.display='block';
-    const formatted=SCRIPT.replace(/\[(.*?)\]/g,'<div style="margin-bottom:4px"><span class="s-tag">$1</span></div>');
-    res.innerHTML=`<div class="script-body">${formatted}<span class="blink"></span></div>`;
-  },2400);
-}
-function cpScript(){
-  navigator.clipboard.writeText(SCRIPT).catch(()=>{});
-  const b=document.getElementById('cp-btn');
-  b.textContent='Copied ✓';b.style.color='var(--green)';
-  setTimeout(()=>{b.textContent='Copy';b.style.color=''},2000);
-}
-
-// ── Clip assist
-function simClip(){
-  const d=document.querySelector('.drop-z');
-  d.innerHTML='<div style="font-size:30px;margin-bottom:12px;opacity:0.7">⏳</div><div style="font-family:var(--fd);font-size:14px;font-weight:600;color:var(--t2)">Analysing your clip…</div>';
-  setTimeout(()=>{
-    d.innerHTML='<div style="font-size:30px;margin-bottom:10px">✅</div><div style="font-family:var(--fd);font-size:14px;font-weight:600;color:var(--green)">Analysis complete</div><div style="font-size:12px;color:var(--t3);margin-top:4px">sample_clip.mp4</div>';
-    document.getElementById('clip-results').style.display='block';
-    const snum=document.getElementById('clip-snum');
-    const bars=document.getElementById('clip-bars');
-    bars.style.opacity='1';
-    let n=0;const iv=setInterval(()=>{n+=3;if(n>=87){n=87;clearInterval(iv);}snum.textContent=n;},28);
-    setTimeout(()=>{
-      animateBars(bars);
-      bars.querySelectorAll('.sp-bar-val').forEach((v,i)=>{v.textContent=['87','74%','91%'][i]});
-    },500);
-  },2200);
-}
+  // Smooth anchor scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('navLinks').classList.remove('open');
+      }
+    });
+  });
 </script>
 </body>
 </html>
